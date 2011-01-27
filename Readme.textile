@@ -1,0 +1,4 @@
+.h1 MortisCMS
+
+The stupid and simple Rails CMS for my stuff.
+
