@@ -1,0 +1,1 @@
+require 'mortiscms/engine' if defined?(Rails)

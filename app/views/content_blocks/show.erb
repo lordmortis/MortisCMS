@@ -1,0 +1,30 @@
+<% content_for :title do %>Content Block - <%= @block.title %><% end %>
+
+<p>
+  <strong>Title:</strong>
+  <%=h @block.title %>
+</p>
+<p>
+  <strong>Tags:</strong>
+	<td><%= tag_list(@block) %></td>
+</p>
+<p>
+  <strong>Pages:</strong>
+	<td><%= page_list(@block) %></td>	
+</p>
+<p>
+  <strong>Summary:</strong>
+	<td><%= @block.summary %></td>	
+</p>
+<%= RedCloth.new(@block.bodytext).to_html %>
+<p>
+  <%= link_to "Edit", edit_content_block_path(@block) %> |
+  <%= link_to "Destroy", @block, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", content_blocks_path %> | 
+
+	<% if @block.published %>
+		<%= link_to "Unpublish", unpublish_content_block_path(@block), :confirm => 'Are you sure?' %>
+	<% else %>
+		<%= link_to "Publish", publish_content_block_path(@block), :confirm => 'Are you sure?' %>
+	<% end %>
+</p>
