@@ -1,5 +1,6 @@
 class ContentPagesController < ApplicationController
 	filter_resource_access
+	helper :mortiscms
 
   def index
     @content_pages = ContentPage.all

@@ -1,5 +1,6 @@
 class ContentTagsController < ApplicationController
 	filter_resource_access
+	helper :mortiscms
 
   def index
     @tags = ContentTag.find(:all)

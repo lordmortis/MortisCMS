@@ -1,4 +1,6 @@
 class ContentViewerController < ApplicationController
+	helper :mortiscms
+	
 	def page
 		@page = nil
 		if params[:id] != nil

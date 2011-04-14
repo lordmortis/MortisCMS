@@ -1,5 +1,6 @@
 class ContentBlocksController < ApplicationController
 	filter_access_to :all
+	helper :mortiscms
 	
   def index
     @blocks = ContentBlock.find(:all)

@@ -16,7 +16,7 @@
   <strong>Summary:</strong>
 	<td><%= @block.summary %></td>	
 </p>
-<%= RedCloth.new(@block.bodytext).to_html %>
+<%= raw RedCloth.new(@block.bodytext).to_html %>
 <p>
   <%= link_to "Edit", edit_content_block_path(@block) %> |
   <%= link_to "Destroy", @block, :confirm => 'Are you sure?', :method => :delete %> |
