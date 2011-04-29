@@ -26,6 +26,10 @@ module Mortiscms
 				migration_template 'contenttagblocks.rb', 'db/migrate/create_content_tag_blocks.rb'
 			end
 			
+      def copy_initializer
+        copy_file 'mortiscms_initializer.rb', 'config/initializers/mortiscms.rb'
+      end			
+			
 			private 
 			
 			def self.next_migration_number(dirname)

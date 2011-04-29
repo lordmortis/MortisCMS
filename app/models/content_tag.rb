@@ -3,10 +3,13 @@ class ContentTag < ActiveRecord::Base
 	has_many :blocks, :class_name => "ContentBlock", :through => :taglinks, :order => ["updated_at desc"]
 	has_many :pages, :class_name => "ContentPage", :foreign_key => "content_tag_id"
 
-	def before_update
-		self.name = name.downcase
-	end
+	before_update :downcase_name
 
+	def downcase_name
+		self.name = name.downcase
+		true
+	end
+	
 	def page?
 		if pagename 
 			return "yes"

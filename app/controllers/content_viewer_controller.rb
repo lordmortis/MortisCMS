@@ -4,17 +4,17 @@ class ContentViewerController < ApplicationController
 	def page
 		@page = nil
 		if params[:id] != nil
-			@page = ContentPage.find_by_name(params[:id].downcase)
+			@page = ContentPage.where(:name => params[:id].downcase).first
 		else
-			@page = ContentPage.find_by_home(true)
+			@page = ContentPage.where(:home => true).first
 			if @page != nil
-				redirect_to :action => "page", :id => @page.name
+				render :action => "content", :id => @page.block.id
 				return
 			end
 		end
 		
 		if @page == nil
-			redirect_to :action => "admin", :controller => "index"
+			redirect_to Mortiscms.config.content_admin_route
 			return
 		elsif	@page.block != nil
 			@block = @page.block

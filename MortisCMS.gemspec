@@ -5,27 +5,60 @@
 
 Gem::Specification.new do |s|
   s.name = %q{MortisCMS}
-  s.version = "0.0.1"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.date = %q{2011-01-27}
+  s.date = %q{2011-04-29}
   s.extra_rdoc_files = [
     "README.textile"
   ]
   s.files = [
+    "app/controllers/content_blocks_controller.rb",
+    "app/controllers/content_pages_controller.rb",
+    "app/controllers/content_tags_controller.rb",
+    "app/controllers/content_viewer_controller.rb",
+    "app/helpers/mortiscms_helper.rb",
     "app/models/content_block.rb",
     "app/models/content_page.rb",
     "app/models/content_tag.rb",
     "app/models/content_tag_block.rb",
+    "app/views/content_blocks/edit.erb",
+    "app/views/content_blocks/index.erb",
+    "app/views/content_blocks/new.erb",
+    "app/views/content_blocks/show.erb",
+    "app/views/content_pages/_form.html.erb",
+    "app/views/content_pages/edit.html.erb",
+    "app/views/content_pages/index.html.erb",
+    "app/views/content_pages/new.html.erb",
+    "app/views/content_pages/show.html.erb",
+    "app/views/content_tags/edit.html.erb",
+    "app/views/content_tags/index.html.erb",
+    "app/views/content_tags/new.html.erb",
+    "app/views/content_tags/show.html.erb",
+    "app/views/content_viewer/content.html.erb",
+    "app/views/content_viewer/content.mobile.erb",
+    "app/views/content_viewer/page.html.erb",
+    "app/views/content_viewer/page.mobile.erb",
+    "app/views/content_viewer/page.rxml",
+    "app/views/content_viewer/tag.html.erb",
+    "app/views/content_viewer/tag.mobile.erb",
+    "app/views/content_viewer/tag.rxml",
+    "config/routes.rb",
+    "lib/generators/mortiscms/install_generator.rb",
+    "lib/generators/mortiscms/templates/contentblocks.rb",
+    "lib/generators/mortiscms/templates/contentpages.rb",
+    "lib/generators/mortiscms/templates/contenttagblocks.rb",
+    "lib/generators/mortiscms/templates/contenttags.rb",
+    "lib/generators/mortiscms/templates/mortis_cms_initializer.rb",
     "lib/mortiscms.rb",
-    "lib/mortiscms/engine.rb"
+    "lib/mortiscms/engine.rb",
+    "lib/railties/tasks.rake"
   ]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
+  s.rubygems_version = %q{1.6.2}
   s.summary = %q{CMS for Rails 3}
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
