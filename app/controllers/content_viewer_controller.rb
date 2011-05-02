@@ -8,8 +8,12 @@ class ContentViewerController < ApplicationController
 		else
 			@page = ContentPage.where(:home => true).first
 			if @page != nil
-				render :action => "content", :id => @page.block.id
-				return
+				if @page.block != nil
+					@block = @page.block
+					render :action => "content", :id => @page.block.id
+					return
+				else
+				end
 			end
 		end
 		
