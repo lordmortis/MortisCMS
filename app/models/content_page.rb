@@ -4,13 +4,14 @@ class ContentPage < ActiveRecord::Base
 	
   attr_accessible :content_block_id, :content_tag_id, :name, :home, :order_index, :navbar
 
-	named_scope :topbar, :order => ["order_index"], :conditions => ["navbar = ?", true]
+	scope :topbar, :order => ["order_index"], :conditions => ["navbar = ?", true]
 
-	before_update :check_home, :downcase_name
+	before_save :check_home, :downcase_name
 	
 	def check_home
 		if self.home
-			for otherpage in ContentPage.find_all_by_home(true)
+			cparelid = ContentPage.arel_table[:id]
+			ContentPage.where(:home => true).where(cparelid.not_eq(self.id)).all.each do |otherpage|
 				otherpage.home = false
 				otherpage.save
 			end
