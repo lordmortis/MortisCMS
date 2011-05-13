@@ -8,7 +8,7 @@ class ContentPage < ActiveRecord::Base
 
 	scope :proper_order, :order => ["order_index"]
 
-	before_save :check_home, :downcase_name, :blank_to_null
+	before_save :blank_to_null, :check_home, :downcase_name
 	
 	def blank_to_null
 		nullarray = [:controller, :action]
@@ -21,6 +21,8 @@ class ContentPage < ActiveRecord::Base
 				end
 			end
 		end
+		
+		true
 	end
 	
 	def check_home
