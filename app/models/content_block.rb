@@ -11,21 +11,6 @@ class ContentBlock < ActiveRecord::Base
 	default_scope :order => "created_at desc"
 	
 	attr_accessible :summary, :autosummarize, :preview, :bodytext, :tag_list, :title
-
-	before_save :blank_to_null
-	
-	def blank_to_null
-		nullarray = [:controller, :action]
-			
-		nullarray.each do |attr|
-			if self[attr] != nil
-				self[attr] = self[attr].strip
-				if self[attr] == ""
-					self[attr] = nil
-				end
-			end
-		end
-	end
 	
 	def html
 		RedCloth.new(bodytext).to_html		

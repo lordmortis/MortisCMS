@@ -8,7 +8,20 @@ class ContentPage < ActiveRecord::Base
 
 	scope :proper_order, :order => ["order_index"]
 
-	before_save :check_home, :downcase_name
+	before_save :check_home, :downcase_name, :blank_to_null
+	
+	def blank_to_null
+		nullarray = [:controller, :action]
+			
+		nullarray.each do |attr|
+			if self[attr] != nil
+				self[attr] = self[attr].strip
+				if self[attr] == ""
+					self[attr] = nil
+				end
+			end
+		end
+	end
 	
 	def check_home
 		if self.home
