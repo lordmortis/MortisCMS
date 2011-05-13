@@ -3,7 +3,7 @@ class ContentPagesController < ApplicationController
 	helper :mortiscms
 
   def index
-    @content_pages = ContentPage.all
+    @content_pages = ContentPage.proper_order.all
   end
   
   def show

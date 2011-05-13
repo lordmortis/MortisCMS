@@ -4,7 +4,9 @@ class CreateContentPages < ActiveRecord::Migration
 			t.string :name, :null => false
       t.integer :content_block_id, :null => true
       t.integer :content_tag_id, :null => true
-			t.integer :order_index
+			t.integer :order_index, :default => 0, :null => true
+			t.string :controller
+			t.string :action
 			t.boolean :home
 			t.boolean :navbar
       t.timestamps
