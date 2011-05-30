@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version = "0.0.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.date = %q{2011-05-13}
+  s.date = %q{2011-05-30}
   s.extra_rdoc_files = [
     "README.textile"
   ]

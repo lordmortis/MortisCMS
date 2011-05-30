@@ -104,9 +104,9 @@ class ContentBlock < ActiveRecord::Base
 		end
 		
 		for newtag in list
-			atag = ContentTag.find_by_name(newtag)
+			atag = ContentTag.find_by_name(newtag.downcase)
 			if atag == nil
-				atag = ContentTag.new(:name => newtag)
+				atag = ContentTag.new(:name => newtag.downcase)
 				atag
 			end
 			
