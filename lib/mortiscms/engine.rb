@@ -11,10 +11,11 @@ module Mortiscms
 	end
 
 	class Configuration
-		attr_accessor :content_admin_route
+		attr_accessor :content_admin_route, :site_name
 		
 		def new
 			self.content_admin_route = {:controller => :index, :action => :admin}
+			self.site_name = "MortisCMS Site"
 		end
 		
 	end

@@ -1,4 +1,4 @@
-<% content_for :title do %>2011 - <%= @page.name.capitalize %><% end %>
+<% content_for :title do %><%= Mortiscms.config.site_name %> - <%= @page.name.capitalize %><% end %>
 <% if @page.tag != nil %>
 <% for block in @page.tag.blocks %>
 <%= link_to(block.updated_at.strftime("%H:%M on %b %d, %Y"), :action => "content", :id => block.id) %>
