@@ -1,6 +1,12 @@
 <% content_for :title do %>2011 - <%= @tag.name.capitalize %><% end %>
 <% for block in @tag.blocks %>
-<%= link_to(block.updated_at.strftime("%H:%M on %b %d, %Y"), :action => "content", :id => block.id) %>
+<%= link_to(:action => "content", :id => block.id) do %>
+<%- if Mortiscms.config.show_titles_in_pages %>
+<span class="mortiscms_list_title"><%= block.title -%></span>
+<%- else %>
+<span class="mortiscms_list_time"><%= block.updated_at.strftime("%H:%M on %b %d, %Y") -%></span>
+<%- end %>
+<%- end %>
 <blockquote>
 <%= block.summary %>
 </blockquote>
