@@ -1,5 +1,5 @@
 <% content_for :title do %>Edit Content<% end %>
-<% content_for :head do %>
+<% content_for :header do %>
 <script>
 var lastedit = null;
 var lastpreview = false;
@@ -65,7 +65,7 @@ $(document).ready(function() {
       </ul>
     </div>
   <% end %>
-<% form_for(@block) do |f| %>
+<%= form_for(@block) do |f| %>
 	<p>
 		<%= f.label :title, "Title" %>
 		<%= f.text_field :title %>

@@ -1,4 +1,4 @@
-<% form_for @content_page do |f| %>
+<%= form_for @content_page do |f| %>
 	<% if @content_page.errors.any? %>
 	  <div id="error_explanation">
 	    <h2><%= pluralize(@content_page.errors.count, "error") %> prohibited this content_page from being saved:</h2>
