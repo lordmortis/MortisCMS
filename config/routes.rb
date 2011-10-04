@@ -1,8 +1,7 @@
 Rails.application.routes.draw do 
-	match 'page/:id' => 'content_viewer#page'
-	match 'blocks' => 'content_viewer#blocks'
-	match 'article/:id' => 'content_viewer#content'
-	match 'tag/:id' => 'content_viewer#tag'
+	match 'content/:id' => 'content_viewer#page'
+	match 'content/article/:id' => 'content_viewer#content'
+	match 'content/tag/:id' => 'content_viewer#tag'
 	
 	resources :content_blocks do
 		collection do
