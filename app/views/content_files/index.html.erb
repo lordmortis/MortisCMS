@@ -1,0 +1,22 @@
+<% content_for :title do %> Content - Files<% end %>
+<h1>Listing Files</h1>
+
+<table width=100%>
+  <tr>
+    <th>Created</th>
+	<th>Updated</th>
+	<td></th>
+  </tr>
+
+<% @files.each do |file| %>
+  <tr>
+    <td valign="top"><%=h file.created_at %></td>
+	<td><%=h file.updated_at %></td>
+	<td><%= link_to 'Show', file %> <%= link_to 'Edit', edit_content_file_path(file) %> <%= link_to 'Destroy', file, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New File', new_content_file_path %>

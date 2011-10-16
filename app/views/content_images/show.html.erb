@@ -1,0 +1,11 @@
+Small:<br/>
+<%= image_tag @image.data.url(:small), size: @image.data.image_size(:small) %><br/>
+Medium:<br/>
+<%= image_tag @image.data.url(:medium), size: @image.data.image_size(:medium) %><br/>
+Large:<br/>
+<%= image_tag @image.data.url(:large), size: @image.data.image_size(:large) %><br/>
+Description: <%= @image.description %><br/>
+<%= link_to "Original Size", @image.data.url %><br/>
+Uploaded By: <%= @image.author.username %><br/>
+<br/>
+<%= link_to "Back", content_images_path %> | <%= link_to "Edit", edit_content_image_path(@image) %>

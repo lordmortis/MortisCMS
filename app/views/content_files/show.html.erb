@@ -1,0 +1,7 @@
+File
+
+Description: <%= @file.description %><br/>
+<%= link_to "File", @file.data.url %><br/>
+Uploaded By: <%= @file.author.username %><br/>
+<br/>
+<%= link_to "Back", content_files_path %> | <%= link_to "Edit", edit_content_file_path(@file) %>

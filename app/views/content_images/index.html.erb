@@ -1,0 +1,24 @@
+<% content_for :title do %> Content - Images<% end %>
+<h1>Listing Images</h1>
+
+<table width=100%>
+  <tr>
+    <th>Image</th>
+    <th>Created</th>
+	<th>Updated</th>
+	<td></th>
+  </tr>
+
+<% @images.each do |image| %>
+  <tr>
+    <td><%= image_tag image.data.url(:small), size: image.data.image_size(:small) %>
+    <td valign="top"><%=h image.created_at %></td>
+    <td><%=h image.updated_at %></td>
+    <td><%= link_to 'Show', image %> <%= link_to 'Edit', edit_content_image_path(image) %> <%= link_to 'Destroy', image, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New File', new_content_image_path %>

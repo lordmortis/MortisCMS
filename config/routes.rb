@@ -15,5 +15,7 @@ Rails.application.routes.draw do
 	end
 
 	resources :content_tags
-	resources :content_pages	
+	resources :content_pages
+	resources :content_files
+	resources :content_images
 end

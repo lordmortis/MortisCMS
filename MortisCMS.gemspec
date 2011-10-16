@@ -5,21 +5,23 @@
 
 Gem::Specification.new do |s|
   s.name = "MortisCMS"
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Brendan Ragan"]
-  s.date = "2011-10-04"
+  s.date = "2011-10-16"
   s.extra_rdoc_files = [
     "README.textile"
   ]
   s.files = [
     "app/controllers/content_blocks_controller.rb",
+    "app/controllers/content_files_controller.rb",
     "app/controllers/content_pages_controller.rb",
     "app/controllers/content_tags_controller.rb",
     "app/controllers/content_viewer_controller.rb",
     "app/helpers/mortiscms_helper.rb",
     "app/models/content_block.rb",
+    "app/models/content_file.rb",
     "app/models/content_page.rb",
     "app/models/content_tag.rb",
     "app/models/content_tag_block.rb",
@@ -27,6 +29,9 @@ Gem::Specification.new do |s|
     "app/views/content_blocks/index.erb",
     "app/views/content_blocks/new.erb",
     "app/views/content_blocks/show.erb",
+    "app/views/content_files/_form.html.erb",
+    "app/views/content_files/index.html.erb",
+    "app/views/content_files/new.html.erb",
     "app/views/content_pages/_form.html.erb",
     "app/views/content_pages/edit.html.erb",
     "app/views/content_pages/index.html.erb",
@@ -46,10 +51,6 @@ Gem::Specification.new do |s|
     "app/views/content_viewer/tag.rxml",
     "config/routes.rb",
     "lib/generators/mortiscms/install_generator.rb",
-    "lib/generators/mortiscms/templates/contentblocks.rb",
-    "lib/generators/mortiscms/templates/contentpages.rb",
-    "lib/generators/mortiscms/templates/contenttagblocks.rb",
-    "lib/generators/mortiscms/templates/contenttags.rb",
     "lib/generators/mortiscms/templates/mortis_cms_initializer.rb",
     "lib/mortiscms.rb",
     "lib/mortiscms/engine.rb",
@@ -63,9 +64,15 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<paperclip>, ["~> 2.3"])
+      s.add_runtime_dependency(%q<paperclip-meta>, [">= 0"])
     else
+      s.add_dependency(%q<paperclip>, ["~> 2.3"])
+      s.add_dependency(%q<paperclip-meta>, [">= 0"])
     end
   else
+    s.add_dependency(%q<paperclip>, ["~> 2.3"])
+    s.add_dependency(%q<paperclip-meta>, [">= 0"])
   end
 end
 
