@@ -1,6 +1,6 @@
 desc 'MortisCMS Tasks'
 
-namespace :MortisCMS do
+namespace :mortiscms_engine do
 	desc 'Ensure all tags of the same name are the same tags'
 	task :coalesce_tags => :environment do
 		print "Coalescing tags..."
