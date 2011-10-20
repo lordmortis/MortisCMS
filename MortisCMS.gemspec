@@ -5,23 +5,25 @@
 
 Gem::Specification.new do |s|
   s.name = "MortisCMS"
-  s.version = "0.1.3"
+  s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Brendan Ragan"]
-  s.date = "2011-10-16"
+  s.date = "2011-10-20"
   s.extra_rdoc_files = [
     "README.textile"
   ]
   s.files = [
     "app/controllers/content_blocks_controller.rb",
     "app/controllers/content_files_controller.rb",
+    "app/controllers/content_images_controller.rb",
     "app/controllers/content_pages_controller.rb",
     "app/controllers/content_tags_controller.rb",
     "app/controllers/content_viewer_controller.rb",
     "app/helpers/mortiscms_helper.rb",
     "app/models/content_block.rb",
     "app/models/content_file.rb",
+    "app/models/content_image.rb",
     "app/models/content_page.rb",
     "app/models/content_tag.rb",
     "app/models/content_tag_block.rb",
@@ -30,8 +32,15 @@ Gem::Specification.new do |s|
     "app/views/content_blocks/new.erb",
     "app/views/content_blocks/show.erb",
     "app/views/content_files/_form.html.erb",
+    "app/views/content_files/edit.html.erb",
     "app/views/content_files/index.html.erb",
     "app/views/content_files/new.html.erb",
+    "app/views/content_files/show.html.erb",
+    "app/views/content_images/_form.html.erb",
+    "app/views/content_images/edit.html.erb",
+    "app/views/content_images/index.html.erb",
+    "app/views/content_images/new.html.erb",
+    "app/views/content_images/show.html.erb",
     "app/views/content_pages/_form.html.erb",
     "app/views/content_pages/edit.html.erb",
     "app/views/content_pages/index.html.erb",
@@ -49,6 +58,7 @@ Gem::Specification.new do |s|
     "app/views/content_viewer/tag.html.erb",
     "app/views/content_viewer/tag.mobile.erb",
     "app/views/content_viewer/tag.rxml",
+    "config/initializers/paperclip_hashed_path.rb",
     "config/routes.rb",
     "lib/generators/mortiscms/install_generator.rb",
     "lib/generators/mortiscms/templates/mortis_cms_initializer.rb",
