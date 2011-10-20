@@ -3,19 +3,23 @@ Rails.application.routes.draw do
 	match 'content/article/:id' => 'content_viewer#content'
 	match 'content/tag/:id' => 'content_viewer#tag'
 	
-	resources :content_blocks do
-		collection do
-			post :preview
+	if Mortiscms.config.routes_enabled
+
+		resources :content_blocks do
+			collection do
+				post :preview
+			end
+
+			member do
+				get :publish
+				get :unpublish
+			end
 		end
 
-		member do
-			get :publish
-			get :unpublish
-		end
+		resources :content_tags
+		resources :content_pages
+		resources :content_files
+		resources :content_images
+
 	end
-
-	resources :content_tags
-	resources :content_pages
-	resources :content_files
-	resources :content_images
 end
