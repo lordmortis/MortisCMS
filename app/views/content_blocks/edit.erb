@@ -37,7 +37,7 @@ function dopreview() {
 				dataType: "text",
 				type: 'POST',
 				success: updatepreview,
-				url: "/content_blocks/preview/"
+				url: "<%= preview_content_blocks_url %>"
 			});
 		}
 	}
