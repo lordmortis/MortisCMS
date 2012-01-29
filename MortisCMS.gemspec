@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "MortisCMS"
-  s.version = "0.1.4"
+  s.version = "0.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Brendan Ragan"]
-  s.date = "2011-10-20"
+  s.date = "2012-01-29"
   s.extra_rdoc_files = [
     "README.textile"
   ]
@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
     "app/models/content_page.rb",
     "app/models/content_tag.rb",
     "app/models/content_tag_block.rb",
+    "app/models/mortiscms_redcloth.rb",
     "app/views/content_blocks/edit.erb",
     "app/views/content_blocks/index.erb",
     "app/views/content_blocks/new.erb",
@@ -76,13 +77,16 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<paperclip>, ["~> 2.3"])
       s.add_runtime_dependency(%q<paperclip-meta>, [">= 0"])
+      s.add_runtime_dependency(%q<RedCloth>, [">= 0"])
     else
       s.add_dependency(%q<paperclip>, ["~> 2.3"])
       s.add_dependency(%q<paperclip-meta>, [">= 0"])
+      s.add_dependency(%q<RedCloth>, [">= 0"])
     end
   else
     s.add_dependency(%q<paperclip>, ["~> 2.3"])
     s.add_dependency(%q<paperclip-meta>, [">= 0"])
+    s.add_dependency(%q<RedCloth>, [">= 0"])
   end
 end
 

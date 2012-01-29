@@ -1,6 +1,7 @@
 class ContentBlock < ActiveRecord::Base
 #	has_paper_trail
-	
+	include MortiscmsHelper
+
 	belongs_to :editor, :class_name => "User"
 	belongs_to :author, :class_name => "User"
 
@@ -11,10 +12,6 @@ class ContentBlock < ActiveRecord::Base
 	default_scope :order => "created_at desc"
 	
 	attr_accessible :summary, :autosummarize, :preview, :bodytext, :tag_list, :title
-	
-	def html
-		RedCloth.new(bodytext).to_html		
-	end
 	
 	def publish(link)
 		self.published = true

@@ -13,7 +13,7 @@ class ContentBlocksController < ApplicationController
   end
 
 	def preview
-		render :text => RedCloth.new(params[:redcloth]).to_html
+		render :text => view_context.redcloth_render(params[:redcloth])
 	end
 	
 	def publish

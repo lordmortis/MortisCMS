@@ -1,5 +1,9 @@
+require "RedCloth"
+require "paperclip"
+require "paperclip-meta"
 require "mortiscms"
 require "rails"
+require "mortiscms_redcloth"
 
 module Mortiscms
 	class Engine < Rails::Engine			

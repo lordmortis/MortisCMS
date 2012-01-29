@@ -31,4 +31,8 @@ module MortiscmsHelper
 		link_to(:action => "content", :controller => "content_viewer", :id => content.id)
 	end
 
+	def redcloth_render(content)
+		parser = RedCloth.new(content)
+		raw parser.to_html(:mortiscms_localfile, :mortiscms_localimage, :textile, :markdown)
+	end
 end
