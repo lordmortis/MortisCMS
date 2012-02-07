@@ -1,5 +1,5 @@
 class ContentMailer < ActionMailer::Base
-	default :from => Mortiscms.config.email_from_address
+	default :from => Mortiscms.config.publish_from_address
   	helper :mortiscms
 
   	def publish_block(block, name, email)
