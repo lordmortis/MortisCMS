@@ -24,8 +24,17 @@ class ContentViewerController < ApplicationController
 
 	def tag
 		@tag = ContentTag.find_by_name(params[:id])
+
 		if @tag == nil
 			redirect_to :action => "section"
+			return
+		end
+
+		@name = @tag.name
+		if current_user != nil and current_user.send(Mortiscms.config.writer_query_message)
+			@collection = @tag.blocks
+		else
+			@collection = @tag.blocks.publicly_viewable
 		end
 	end
 
@@ -52,12 +61,15 @@ private
 			return
 		end
 
+		@tag = @page.tag
+		@name = @tag.name
+
 		if current_user != nil and current_user.send(Mortiscms.config.writer_query_message)
-			@collection = @page.tag.blocks
+			@collection = @tag.blocks
 		else
-			@collection = @page.tag.blocks.publicly_viewable
+			@collection = @tag.blocks.publicly_viewable
 		end
 
-		render "page"
+		render "tag"
 	end
 end

@@ -1,30 +1,26 @@
 <% content_for :title do %>Content<% end %>
-<h1>Listing content</h1>
+<h2>Content Blocks</h2>
 
 <table width=100%>
   <tr>
     <th>Created</th>
-		<th>Updated</th>
-		<th>Summary</th>
-		<th>Tags</th>
-		<th>Pages</th>		
+	<th>Summary</th>
+	<th>Tags</th>
+	<th>Pages</th>		
   </tr>
 
 <% @blocks.each do |block| %>
-  <tr>
-    <td valign="top"><%=h block.created_at %></td>
-		<td><%=h block.updated_at %></td>
-		<td><%=h block.summary %></td>
-		<td><%= tag_list(block) %></td>
-		<td><%= page_list(block) %></td>
-    <td><%= link_to 'Show', block %>
-			<%= link_to 'Edit', edit_content_block_path(block) %>
+<% if block.published %>
+  <tr style="background: green;">
+ <% else %>
+ 	<tr style="background: red;">
+ <% end %>
+    <td valign="top"><%=h block.created_at.strftime("%D %H:%M") %></td>
+		<td><% if block.summary.strip != "" %><%= link_to(h(block.summary), block) %><% else %><%= link_to("Show", block) %><% end %></td>
+		<td><%=raw tag_list(block) %></td>
+		<td><%=raw page_list(block) %></td>
+	    <td><%= link_to 'Edit', edit_content_block_path(block) %>
 			<%= link_to 'Destroy', block, :confirm => 'Are you sure?', :method => :delete %>
-			<% if block.published %>
-			<%= link_to "Unpublish", unpublish_content_block_path(block), :confirm => 'Are you sure?' %>
-			<% else %>
-			<%= link_to "Publish", publish_content_block_path(block), :confirm => 'Are you sure?' %>
-			<% end %>
 		</td>
   </tr>
 <% end %>

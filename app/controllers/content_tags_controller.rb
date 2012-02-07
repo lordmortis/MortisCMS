@@ -12,10 +12,7 @@ class ContentTagsController < ApplicationController
 
   def show
 		@tag = ContentTag.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-		end
+    redirect_to controller: :content_viewer, action: :tag, id: @tag.name.downcase
   end
 
   def new

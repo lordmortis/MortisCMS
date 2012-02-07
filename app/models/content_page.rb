@@ -25,6 +25,30 @@ class ContentPage < ActiveRecord::Base
 		true
 	end
 	
+	def text_type
+		if controller != nil
+			"Rails Page"
+		elsif block != nil
+			"Content Block"
+		elsif tag != nil
+			"Tag List"
+		else
+			"Unknown"
+		end
+	end
+
+	def linked_object
+		if controller 
+			{controller: controller, action: action}
+		elsif block != nil
+			block
+		elsif tag != nil
+			tag
+		else
+			{}
+		end
+	end
+
 	def check_home
 		if self.home
 			cparelid = ContentPage.arel_table[:id]
@@ -45,7 +69,7 @@ class ContentPage < ActiveRecord::Base
 		if block == nil
 			true
 		else
-			block.published
+			block.public?
 		end
 	end
 end

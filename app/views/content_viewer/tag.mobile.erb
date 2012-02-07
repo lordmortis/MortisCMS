@@ -1,4 +1,7 @@
-<% content_for :title do %>2011 - <%= @tag.name.capitalize %><% end %>
+<% content_for :title do %><%= Mortiscms.config.site_name %> - <%= @name.capitalize %><% end %>
+<% content_for :header do %>
+<%= auto_discovery_link_tag(:rss, {:format => :xml}, {:title => "#{Mortiscms.config.site_name} - RSS feed - #{@name.capitalize}"}) %>
+<% end %>
 <% for block in @tag.blocks %>
 <%= link_to(:action => "content", :id => block.id) do %>
 <%- if Mortiscms.config.show_titles_in_pages %>

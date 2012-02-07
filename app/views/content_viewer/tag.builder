@@ -1,7 +1,7 @@
 xml.instruct! :xml, :version=>"1.0" 
 xml.rss(:version=>"2.0"){
   xml.channel{
- 		xml.title("#{Mortiscms.config.site_name} - RSS feed - #{@tag.name.capitalize}")
+ 		xml.title("#{Mortiscms.config.site_name} - RSS feed - #{@name.capitalize}")
 		xml.link(url_for(:action => "tag", :controller => "content_viewer", :id => @tag.name, :skip_relative_url_root => true))
     xml.description("Items tagged with #{@tag.name}")
     xml.language("en-AU")

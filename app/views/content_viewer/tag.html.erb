@@ -1,21 +1,23 @@
-<% content_for :title do %><%= Mortiscms.config.site_name %> - <%= @tag.name.capitalize %><% end %>
+<% content_for :title do %><%= Mortiscms.config.site_name %> - <%= @name.capitalize %><% end %>
 <% content_for :header do %>
-<%= auto_discovery_link_tag(:rss, {:format => :xml}, {:title => "#{Mortiscms.config.site_name} - RSS feed - #{@tag.name.capitalize}"}) %>
+<%= auto_discovery_link_tag(:rss, {:format => :xml}, {:title => "#{Mortiscms.config.site_name} - RSS feed - #{@name.capitalize}"}) %>
 <% end %>
-<% for block in @tag.blocks %>
-<%= link_to(:action => "content", :id => block.id) do %>
+<% @collection.each do |block| %>
 <%- if Mortiscms.config.show_titles_in_pages %>
 <span class="mortiscms_list_title">
 <%= link_to block.title, :action => "content", :id => block.id  -%>
 </span>
-<span class="mortiscms_list_time">(<%= block.updated_at.strftime("%H:%M on %b %d, %Y") -%>)</span>
-<%- else %>
-<span class="mortiscms_list_time">
-<%= link_to block.updated_at.strftime("%H:%M on %b %d, %Y"), :action => "content", :id => block.id -%>
-</span>
 <%- end %>
-<%- end %>
+<% if block.published_at != nil -%>
+<span class="mortiscms_list_time">(<%= block.published_at.strftime("%H:%M on %b %d, %Y") -%>
+	<% if block.updated_at > (block.published_at + 5.minutes) %>
+	, last updated at: <%= block.updated_at.strftime("%H:%M on %b %d, %Y") -%>
+	<% end %>
+)</span>
+<% else -%>
+<span style="color: red;">Unpublished, last edited at: <%= block.updated_at.strftime("%H:%M on %b %d, %Y") -%></span>
+<% end -%>
 <blockquote>
 <%= block.summary %>
 </blockquote>
-<% end %>
+<% end -%>

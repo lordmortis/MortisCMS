@@ -9,12 +9,12 @@ class ContentBlock < ActiveRecord::Base
 	has_many :tags, :class_name => "ContentTag", :through => :taglinks
 	has_many :pages, :class_name => "ContentPage", :foreign_key => "content_block_id"
 	
-	default_scope :order => "created_at desc"
+	default_scope :order => "published_at desc"
 	
 	attr_accessible :summary, :autosummarize, :preview, :bodytext, :tag_list, :title
 	
 	def publish(link, editor = nil)
-		self.published = true
+		self.published_at = Time.now
 
 		if editor != nil
 			self.editor = editor
@@ -53,7 +53,7 @@ class ContentBlock < ActiveRecord::Base
 	end
 	
 	def unpublish
-		self.published = false
+		self.published_at = nil
 		
 		# Remove tweet.
 #		if (self.tweet_id != nil and ContentTwitterLib::Setup.Working)
@@ -137,11 +137,15 @@ class ContentBlock < ActiveRecord::Base
 		end
 	end
 	
+	def published
+		self.published_at != nil
+	end
+
 	def public?
-		self.published
+		self.published_at != nil
 	end
 
 	def self.publicly_viewable
-		where(published: true)
+		where("content_blocks.published_at IS NOT NULL")
 	end
 end

@@ -8,6 +8,7 @@ class ContentPagesController < ApplicationController
   
   def show
     @content_page = ContentPage.find(params[:id])
+    redirect_to controller: :content_viewer, action: :page, id: @content_page.name.downcase
   end
   
   def new

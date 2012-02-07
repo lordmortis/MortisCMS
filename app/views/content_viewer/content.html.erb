@@ -1,10 +1,17 @@
 <% content_for :title do %><%= @block.title %><% end %>
+<% if @block.published_at == nil %>
+<h2 style="color: red;">Unpublished</h2>
+Last edited at: <%= @block.updated_at.strftime("%H:%M on %b %d, %Y") -%><br/>
+<% end %>
 <%= redcloth_render(@block.bodytext) %>
 <% for tag in @block.tags %>
 <%= link_to(tag.name.capitalize, :action => "tag", :id => tag.name) %>
 <% end %>
 <br/>
-Last Updated: <%= @block.updated_at.strftime("%H:%M on %b %d, %Y (GMT)") %>
+<% if @block.published_at != nil %>
+Published: <%= @block.published_at.strftime("%H:%M on %b %d, %Y (GMT)") %><br/>
+<% end %>
+Last Updated: <%= @block.updated_at.strftime("%H:%M on %b %d, %Y (GMT)") %><br/>
 <% if permitted_to? :update, @block %><br/><%= link_to 'Edit', edit_content_block_path(@block) %><% end -%>
 <% if current_user.send(Mortiscms.config.editor_query_message) %>
 	<% if @block.published %>

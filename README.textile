@@ -2,5 +2,81 @@ h1. MortisCMS
 
 The stupid and simple Rails CMS for my stuff.
 
-Todo: 
-Need an image gallery
+h2. Requirements
+
+* User model
+** configured with "user_model" below
+** must respond to "editor_query_message" and "writer_query_message"
+** currently logged in user must respond to "current_user" helper
+
+h2. Configuration Options
+
+* site_name (string)
+** default: "MortisCMS Site"
+** The Name of the site - used in the content viewer templates
+* user_model (string - Class name)
+** default: "User"
+** The User model. Must conform to the requirements above.
+* content_admin_route (route hash)
+** default: "{:controller => :index, :action => :admin}"
+** The rails route that maps to the admin page. Used for when no homepage is available
+* show_title_in_pages (boolean)
+** default: false
+** Show content block titles in pages that are lists of tags
+* show_titles_in_tags (boolean)
+** default: false
+** Show content block titles in tag view pages
+* standard_routes (boolean)
+** default: true
+** enable the standard routes for MortisCMS (see "routes" below)
+* publish_to_email (hash)
+** default: nil
+** Send out email when content is published. Set to "nil" if you don't want this to work, otherwise it should be a hash containing:
+*** query
+**** The query to use to return list of objects to email
+*** name
+**** the method/property to call on the members of the "query" collection to get the name of the recipient
+*** email
+**** the method/property to call on the members of the "query" collection to get the email address of the recipient
+* publish_from_address
+** Email address to publish emails from
+* link_root (string - url)
+** default: ""
+** Root of the website to apply to images etc.
+* writer_query_message (symbol - method name)
+** default: :is_writer?
+** Method to query on "current_user" to find out if the user is a writer. Method must return boolean.
+* editor_query_message (symbol - method name)
+** default: :is_editor?
+** Method to query on "current_user" to find out if the user is an editor. Method must return boolean.
+
+h2. "Writers" and "Editors"
+
+Authorization for the routing is supposed to be handled by your Rails App, but there are two special methods defined by the configuration: __writer_query_message__ and __editor_query_message__. This is for when we return lists on the __content_viewer__ templates or on the various query methods on the objects. 
+
+h2. Routes
+
+By default MortisCMS will set up the following routes:
+
+<pre>
+resources :content_blocks do
+	collection do
+		post :preview
+	end
+
+	member do
+		get :publish
+		get :unpublish
+	end
+end
+
+resources :content_tags
+resources :content_pages
+resources :content_files
+resources :content_images
+</pre>
+
+
+h2. Issues to fix
+
+# Merging of configuration.
