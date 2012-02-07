@@ -9,7 +9,7 @@ module MortiscmsRedclothExtensions
 			if file == nil
 				$~[2]
 			else
-				"<a href='#{file.data.url}'>#{$~[2]}</a>"
+				"<a href='#{Mortiscms.config.link_root}#{file.data.url}'>#{$~[2]}</a>"
 			end
 		end
 	end
@@ -31,7 +31,7 @@ module MortiscmsRedclothExtensions
 				image_size = image.data.image_size(size)
 				width = image_size.split('x')[0]
 				height = image_size.split('x')[1]
-				"<img src='#{image.data.url(size)}' width='#{width}' height='#{height}'/>"
+				"<img src='#{Mortiscms.config.link_root}#{image.data.url(size)}' width='#{width}' height='#{height}'/>"
 			end
 		end
 	end
