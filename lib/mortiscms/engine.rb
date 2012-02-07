@@ -15,8 +15,8 @@ module Mortiscms
 	end
 
 	class Configuration
-		attr_accessor :content_admin_route, :site_name, :show_titles_in_pages, 
-						:show_titles_in_tags, :routes_enabled, :user_model
+		attr_accessor :content_admin_route, :site_name, :show_titles_in_pages, :email_from_address,
+						:show_titles_in_tags, :routes_enabled, :user_model, :link_root, :publish_to_email
 		
 		def new
 			self.content_admin_route = {:controller => :index, :action => :admin}
@@ -25,7 +25,9 @@ module Mortiscms
 			self.show_titles_in_tags = false
 			self.routes_enabled = true
 			self.user_model = "User"
-#			self.content_viewer = Mortiscms::ContentViewerConfiguration.new
+			self.publish_to_email = false
+			self.email_from_address = "junk@place.com"
+			self.link_root = ""
 		end
 		
 	end
