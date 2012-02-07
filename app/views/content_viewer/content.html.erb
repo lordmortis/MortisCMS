@@ -13,12 +13,12 @@ Published: <%= @block.published_at.strftime("%H:%M on %b %d, %Y (GMT)") %><br/>
 <% end %>
 Last Updated: <%= @block.updated_at.strftime("%H:%M on %b %d, %Y (GMT)") %><br/>
 <% if permitted_to? :update, @block %><br/><%= link_to 'Edit', edit_content_block_path(@block) %><% end -%>
-<% if current_user.send(Mortiscms.config.editor_query_message) %>
+<% if current_user != nil and current_user.send(Mortiscms.config.editor_query_message) %>
 	<% if @block.published %>
 		<%= link_to "Unpublish", unpublish_content_block_path(@block), :confirm => 'Are you sure?' %>
 	<% else %>
 		<%= link_to "Publish", publish_content_block_path(@block), :confirm => 'Are you sure?' %>
 	<% end %>
-<% else %>
+<% elsif current_user != nil and current_user.send(Mortiscms.config.writer_query_message) %>
 	<% if @block.published %>Published<% else %>Unpublished<% end %>
 <% end %>
