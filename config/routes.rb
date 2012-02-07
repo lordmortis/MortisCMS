@@ -1,8 +1,9 @@
 Rails.application.routes.draw do 
+	match 'content/hidden' => 'content_viewer#not_public'
 	match 'content/:id' => 'content_viewer#page'
 	match 'content/article/:id' => 'content_viewer#content'
 	match 'content/tag/:id' => 'content_viewer#tag'
-	
+		
 	if Mortiscms.config.routes_enabled
 
 		resources :content_blocks do

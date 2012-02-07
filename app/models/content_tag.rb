@@ -17,4 +17,8 @@ class ContentTag < ActiveRecord::Base
 			return "no"
 		end
 	end
+
+	def public?
+		true
+	end
 end

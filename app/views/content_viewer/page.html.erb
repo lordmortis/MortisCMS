@@ -5,7 +5,7 @@
 <% end %>
 <% end %>
 <% if @page.tag != nil %>
-<% for block in @page.tag.blocks %>
+<% @collection.each do |block| %>
 <%- if Mortiscms.config.show_titles_in_pages %>
 <span class="mortiscms_list_title">
 <%= link_to block.title, :action => "content", :id => block.id  -%>

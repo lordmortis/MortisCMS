@@ -15,6 +15,10 @@ class ContentViewerController < ApplicationController
 		@block = ContentBlock.find(params[:id])
 		if @block == nil
 			redirect_to :action => "section"
+		else
+			if !@block.public? and !current_user.send(Mortiscms.config.writer_query_message)
+				redirect_to action: :not_public
+			end
 		end
 	end
 
@@ -38,10 +42,20 @@ private
 					redirect_to :controller => @page.controller, :action => "index"
 				end
 				return
-		elsif	@page.block != nil
+		elsif @page.block != nil
 			@block = @page.block
-			render :action => "content", :id => @page.block.id
+			if !@block.public? and !(current_user.send(Mortiscms.config.writer_query_message))
+				redirect_to action: :not_public
+			else
+				render :action => "content", :id => @page.block.id
+			end
 			return
+		end
+
+		if current_user != nil and current_user.send(Mortiscms.config.writer_query_message)
+			@collection = @page.tag.blocks
+		else
+			@collection = @page.tag.blocks.publicly_viewable
 		end
 
 		render "page"

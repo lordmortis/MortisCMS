@@ -31,8 +31,7 @@ module Mortiscms
 			self.link_root = ""
 			self.writer_query_message = :is_writer?
 			self.editor_query_message = :is_editor?
-		end
-		
+		end		
 	end
 
 	def self.config(&block)

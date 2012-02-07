@@ -40,4 +40,12 @@ class ContentPage < ActiveRecord::Base
 		self.name = name.downcase
 		true
 	end
+
+	def public?
+		if block == nil
+			true
+		else
+			block.published
+		end
+	end
 end

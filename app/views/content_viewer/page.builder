@@ -5,7 +5,8 @@ xml.rss(:version=>"2.0"){
 		xml.link(url_for(:action => "page", :controller => "content_viewer", :id => @page.name, :skip_relative_url_root => true))
     xml.description("Items from the #{@page.name.capitalize} page")
     xml.language("en-AU")
-    for block in @page.tag.blocks
+
+    for block in @collection
       xml.item do
         xml.title(block.title)
 				xml.description(block.summary)

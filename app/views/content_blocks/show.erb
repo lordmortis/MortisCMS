@@ -22,9 +22,13 @@
   <%= link_to "Destroy", @block, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", content_blocks_path %> | 
 
-	<% if @block.published %>
-		<%= link_to "Unpublish", unpublish_content_block_path(@block), :confirm => 'Are you sure?' %>
+	<% if current_user.send(Mortiscms.config.editor_query_message) %>
+		<% if @block.published %>
+			<%= link_to "Unpublish", unpublish_content_block_path(@block), :confirm => 'Are you sure?' %>
+		<% else %>
+			<%= link_to "Publish", publish_content_block_path(@block), :confirm => 'Are you sure?' %>
+		<% end %>
 	<% else %>
-		<%= link_to "Publish", publish_content_block_path(@block), :confirm => 'Are you sure?' %>
+		<% if @block.published %>Published<% else %>Unpublished<% end %>
 	<% end %>
 </p>

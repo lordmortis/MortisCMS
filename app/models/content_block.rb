@@ -13,8 +13,13 @@ class ContentBlock < ActiveRecord::Base
 	
 	attr_accessible :summary, :autosummarize, :preview, :bodytext, :tag_list, :title
 	
-	def publish(link)
+	def publish(link, editor = nil)
 		self.published = true
+
+		if editor != nil
+			self.editor = editor
+		end
+
 		if Mortiscms.config.publish_to_email != false
 			query = Mortiscms.config.publish_to_email[:query]
 			namemethod = Mortiscms.config.publish_to_email[:name]
@@ -25,6 +30,8 @@ class ContentBlock < ActiveRecord::Base
 				ContentMailer.publish_block(self, name, email).deliver
 			end
 		end
+
+
 #  FIXME : needs to work with new engine!		
 #		if (self.short_url == nil && File.exist?("config/bitly.yml"))
 #			bitlycreds = YAML.load_file("config/bitly.yml")["bitly"]
@@ -128,5 +135,13 @@ class ContentBlock < ActiveRecord::Base
 		else
 			self.summary = bodytext[0..156] + "..."
 		end
+	end
+	
+	def public?
+		self.published
+	end
+
+	def self.publicly_viewable
+		where(published: true)
 	end
 end
