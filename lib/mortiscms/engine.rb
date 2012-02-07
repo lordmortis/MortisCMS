@@ -14,15 +14,6 @@ module Mortiscms
 		Mime::Type.register_alias "text/html", :mobile
 	end
 
-	class ContentViewerConfiguration
-		attr_accessor :page_list_titles, :tag_list_titles
-
-		def new
-			self.page_list_titles = false
-			self.tag_list_titles = false
-		end
-	end
-
 	class Configuration
 		attr_accessor :content_admin_route, :site_name, :show_titles_in_pages, 
 						:show_titles_in_tags, :routes_enabled
