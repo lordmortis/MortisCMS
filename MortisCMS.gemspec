@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "MortisCMS"
-  s.version = "0.1.6"
+  s.version = "0.1.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Brendan Ragan"]
-  s.date = "2012-01-29"
+  s.date = "2012-02-07"
   s.extra_rdoc_files = [
     "README.textile"
   ]
@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
     "app/controllers/content_tags_controller.rb",
     "app/controllers/content_viewer_controller.rb",
     "app/helpers/mortiscms_helper.rb",
+    "app/mailers/content_mailer.rb",
     "app/models/content_block.rb",
     "app/models/content_file.rb",
     "app/models/content_image.rb",
@@ -41,6 +42,7 @@ Gem::Specification.new do |s|
     "app/views/content_images/index.html.erb",
     "app/views/content_images/new.html.erb",
     "app/views/content_images/show.html.erb",
+    "app/views/content_mailer/publish_block.text.erb",
     "app/views/content_pages/_form.html.erb",
     "app/views/content_pages/edit.html.erb",
     "app/views/content_pages/index.html.erb",
@@ -52,16 +54,17 @@ Gem::Specification.new do |s|
     "app/views/content_tags/show.html.erb",
     "app/views/content_viewer/content.html.erb",
     "app/views/content_viewer/content.mobile.erb",
-    "app/views/content_viewer/page.builder",
-    "app/views/content_viewer/page.html.erb",
-    "app/views/content_viewer/page.mobile.erb",
+    "app/views/content_viewer/not_public.erb",
     "app/views/content_viewer/tag.builder",
     "app/views/content_viewer/tag.html.erb",
     "app/views/content_viewer/tag.mobile.erb",
     "config/initializers/paperclip_hashed_path.rb",
     "config/routes.rb",
     "lib/generators/mortiscms/install_generator.rb",
-    "lib/generators/mortiscms/templates/mortis_cms_initializer.rb",
+    "lib/generators/mortiscms/install_mailer_templates.rb",
+    "lib/generators/mortiscms/templates/mortiscms_initializer.rb",
+    "lib/generators/mortiscms/templates/publish_block.html.erb",
+    "lib/generators/mortiscms/templates/publish_block.text.erb",
     "lib/mortiscms.rb",
     "lib/mortiscms/engine.rb",
     "lib/mortiscms_redcloth.rb",
