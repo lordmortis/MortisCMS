@@ -2,8 +2,8 @@ class ContentBlock < ActiveRecord::Base
 #	has_paper_trail
 	include MortiscmsHelper
 
-	belongs_to :editor, :class_name => "User"
-	belongs_to :author, :class_name => "User"
+	belongs_to :editor, :class_name => Mortiscms.config.user_model
+	belongs_to :author, :class_name => Mortiscms.config.user_model
 
 	has_many :taglinks, :class_name => "ContentTagBlock", :foreign_key => "content_block_id"
 	has_many :tags, :class_name => "ContentTag", :through => :taglinks

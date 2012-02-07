@@ -16,7 +16,7 @@ module Mortiscms
 
 	class Configuration
 		attr_accessor :content_admin_route, :site_name, :show_titles_in_pages, 
-						:show_titles_in_tags, :routes_enabled
+						:show_titles_in_tags, :routes_enabled, :user_model
 		
 		def new
 			self.content_admin_route = {:controller => :index, :action => :admin}
@@ -24,6 +24,7 @@ module Mortiscms
 			self.show_titles_in_pages = false
 			self.show_titles_in_tags = false
 			self.routes_enabled = true
+			self.user_model = "User"
 #			self.content_viewer = Mortiscms::ContentViewerConfiguration.new
 		end
 		
@@ -40,5 +41,4 @@ module Mortiscms
 	def self.setup(&block)
 		self.config(block)
 	end
-
 end
