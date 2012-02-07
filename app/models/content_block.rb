@@ -15,6 +15,16 @@ class ContentBlock < ActiveRecord::Base
 	
 	def publish(link)
 		self.published = true
+		if Mortiscms.config.publish_to_email != false
+			query = Mortiscms.config.publish_to_email[:query]
+			namemethod = Mortiscms.config.publish_to_email[:name]
+			emailmethod = Mortiscms.config.publish_to_email[:email]
+			query.each do |person|
+				name = person.send(namemethod)
+				email = person.send(emailmethod)
+				ContentMailer.publish_block(self, name, email).deliver
+			end
+		end
 #  FIXME : needs to work with new engine!		
 #		if (self.short_url == nil && File.exist?("config/bitly.yml"))
 #			bitlycreds = YAML.load_file("config/bitly.yml")["bitly"]
@@ -39,20 +49,20 @@ class ContentBlock < ActiveRecord::Base
 		self.published = false
 		
 		# Remove tweet.
-		if (self.tweet_id != nil and ContentTwitterLib::Setup.Working)
-			twittercreds = YAML.load_file("config/authlogic.yml")["connect"]["twitter"]
-			oauth = Twitter::OAuth.new(twittercreds["key"], twittercreds["secret"])
-			oauth.authorize_from_access(twittercreds["master_account_token"], twittercreds["master_account_secret"])
+#		if (self.tweet_id != nil and ContentTwitterLib::Setup.Working)
+#			twittercreds = YAML.load_file("config/authlogic.yml")["connect"]["twitter"]
+#			oauth = Twitter::OAuth.new(twittercreds["key"], twittercreds["secret"])
+#			oauth.authorize_from_access(twittercreds["master_account_token"], twittercreds["master_account_secret"])
 
-			client = Twitter::Base.new(oauth)
-			begin
-				client.status_destroy(self.tweet_id)
-				self.tweet_id = nil
-			rescue Twitter::NotFound => boom
-				self.tweet_id = nil
-			end
-		end
-		
+#			client = Twitter::Base.new(oauth)
+#			begin
+#				client.status_destroy(self.tweet_id)
+#				self.tweet_id = nil
+#			rescue Twitter::NotFound => boom
+#				self.tweet_id = nil
+#			end
+#		end
+#		
 		# Remove LJ post.
 		self.save
 	end
