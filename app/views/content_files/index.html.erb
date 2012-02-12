@@ -3,12 +3,14 @@
 
 <table width=100%>
   <tr>
+  	<th>Description</th>
     <th>Created</th>
   	<td></th>
   </tr>
 
 <% @files.each do |file| %>
   <tr>
+    <td valign="top"><%= link_to(file.description, file) %></td>
     <td valign="top"><%= link_to(file.created_at.strftime("%H:%M on %b %d, %Y"), file) %></td>
     <td><%= link_to 'Edit', edit_content_file_path(file) %> <%= link_to 'Destroy', file, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
