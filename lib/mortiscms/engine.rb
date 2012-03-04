@@ -17,7 +17,7 @@ module Mortiscms
 	class Configuration
 		attr_accessor :content_admin_route, :site_name, :show_titles_in_pages, :publish_from_address,
 						:show_titles_in_tags, :routes_enabled, :user_model, :link_root, :publish_to_email,
-						:writer_query_message, :editor_query_message
+						:publish_extra_emails, :writer_query_message, :editor_query_message
 		
 		def new
 			self.content_admin_route = {:controller => :index, :action => :admin}
@@ -27,6 +27,7 @@ module Mortiscms
 			self.routes_enabled = true
 			self.user_model = "User"
 			self.publish_to_email = nil
+			self.publish_extra_emails = nil
 			self.publish_from_address = "junk@place.com"
 			self.link_root = ""
 			self.writer_query_message = :is_writer?

@@ -29,6 +29,11 @@ class ContentBlock < ActiveRecord::Base
 				email = person.send(emailmethod)
 				ContentMailer.publish_block(self, name, email).deliver
 			end
+			if Mortiscms.config.publish_extra_emails != nil
+				Mortiscms.config.publish_extra_emails.each do |email|
+					ContentMailer.publish_block(self, email[0], email[1]).deliver
+				end
+			end
 		end
 
 
