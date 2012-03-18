@@ -18,7 +18,11 @@ class ContentBlocksController < ApplicationController
 	
 	def publish
 		@block = ContentBlock.find(params[:id])
-		@block.publish(url_for(:action => "content", :controller => "content_viewer", :id => @block.id, :skip_relative_url_root => true))
+    email = false
+    if params[:email]
+      email = params[:email].downcase == "true"
+    end
+		@block.publish(url_for(:action => "content", :controller => "content_viewer", :id => @block.id, :skip_relative_url_root => true), current_user, email)
 		redirect_to(@block)
 	end
 	

@@ -12,8 +12,8 @@ Rails.application.routes.draw do
 			end
 
 			member do
-				get :publish
-				get :unpublish
+				post :publish
+				post :unpublish
 			end
 		end
 

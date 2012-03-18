@@ -24,9 +24,9 @@
 
 	<% if current_user.send(Mortiscms.config.editor_query_message) %>
 		<% if @block.published %>
-			<%= link_to "Unpublish", unpublish_content_block_path(@block), :confirm => 'Are you sure?' %>
+			<%= link_to "Unpublish", unpublish_content_block_path(@block), :confirm => 'Are you sure?', method: :post %>
 		<% else %>
-			<%= link_to "Publish", publish_content_block_path(@block), :confirm => 'Are you sure?' %>
+			<%= render partial: "content_blocks/publish" %>
 		<% end %>
 	<% else %>
 		<% if @block.published %>Published<% else %>Unpublished<% end %>

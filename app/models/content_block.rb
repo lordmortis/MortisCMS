@@ -13,14 +13,14 @@ class ContentBlock < ActiveRecord::Base
 	
 	attr_accessible :summary, :autosummarize, :preview, :bodytext, :tag_list, :title
 	
-	def publish(link, editor = nil)
+	def publish(link, editor = nil, email)
 		self.published_at = Time.now
 
 		if editor != nil
 			self.editor = editor
 		end
 
-		if Mortiscms.config.publish_to_email != false
+		if Mortiscms.config.publish_to_email != false and email
 			query = Mortiscms.config.publish_to_email[:query]
 			namemethod = Mortiscms.config.publish_to_email[:name]
 			emailmethod = Mortiscms.config.publish_to_email[:email]

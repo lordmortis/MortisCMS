@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "MortisCMS"
-  s.version = "0.1.10"
+  s.version = "0.1.11"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Brendan Ragan"]
-  s.date = "2012-03-13"
+  s.date = "2012-03-18"
   s.extra_rdoc_files = [
     "README.textile"
   ]
@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
     "app/models/content_page.rb",
     "app/models/content_tag.rb",
     "app/models/content_tag_block.rb",
+    "app/views/content_blocks/_publish.erb",
     "app/views/content_blocks/edit.erb",
     "app/views/content_blocks/index.erb",
     "app/views/content_blocks/new.erb",
