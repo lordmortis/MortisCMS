@@ -6,6 +6,6 @@ class ContentMailer < ActionMailer::Base
   	def publish_block(block, name, email)
   		@block = block
   		@name = name
-  		mail(:to => email, subject: block.summary)
+  		mail(:to => email, subject: block.title)
   	end
 end
