@@ -27,7 +27,9 @@ class ContentBlock < ActiveRecord::Base
 			query.each do |person|
 				name = person.send(namemethod)
 				email = person.send(emailmethod)
-				ContentMailer.publish_block(self, name, email).deliver
+				if email != nil and email.strip != ""
+					ContentMailer.publish_block(self, name, email).deliver
+				end
 			end
 			if Mortiscms.config.publish_extra_emails != nil
 				Mortiscms.config.publish_extra_emails.each do |email|
