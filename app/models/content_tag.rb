@@ -11,11 +11,7 @@ class ContentTag < ActiveRecord::Base
 	end
 	
 	def page?
-		if pagename 
-			return "yes"
-		else
-			return "no"
-		end
+		pages.count > 0 
 	end
 
 	def public?

@@ -39,7 +39,13 @@ class ContentPage < ActiveRecord::Base
 
 	def linked_object
 		if controller 
-			{controller: controller, action: action}
+			begin
+				route = {controller: controller, action: action}
+  				ActionController::Routing::Routes.recognize_path(route)
+  				route
+			rescue
+  				{}
+			end
 		elsif block != nil
 			block
 		elsif tag != nil
