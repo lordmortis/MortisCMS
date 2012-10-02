@@ -21,12 +21,10 @@ module MortiscmsRedclothExtensions
 				"Image Not Found!"
 			else
 				size = $~[2].downcase
-				if size == ""
-					size = nil
-				elsif size != "large" and size != "medium" and size != "small"
-					size = nil
-				else
+				if size == "large" or size == "medium" or size == "small"
 					size = size.to_sym
+				else
+					size = nil
 				end
 				image_size = image.data.image_size(size)
 				width = image_size.split('x')[0]
