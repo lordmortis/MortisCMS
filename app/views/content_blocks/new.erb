@@ -1,57 +1,6 @@
 <% content_for :title do %>New Content<% end %>
 <% content_for :header do %>
-<script>
-var lastedit = null;
-var lastpreview = false;
-
-function updatepreview(object, data, textStatus, XMLHttpRequest) {
-	$("#preview_box").html(object);
-}
-
-function dosummarize() {
-	var autosummarize_enabled = $("#content_block_autosummarize").attr("checked")
-	if (autosummarize_enabled) {
-		var text = $("#content_block_bodytext").val();
-		if (text.length <= 140)
-			$("#content_block_summary").val(text);
-		else
-			$("#content_block_summary").val(text.slice(0, 116) + "...");
-		countupdate();
-	}
-}
-
-function countupdate() {
-	$("#summary_count").html($("#content_block_summary").val().length + 22);
-}
-
-function dopreview() {
-	var preview_enabled = $("#content_block_preview").attr("checked")
-	if (preview_enabled) {
-		lasteditdelay = ((new Date() - lastedit) > 1000) || (lastedit == null);
-		if ( lasteditdelay && ( !lastpreview ) ) {
-			lastpreview = true;
-			$.ajax({
-				data: {
-						'redcloth': $("#content_block_bodytext").val(),
-					},
-				dataType: "text",
-				type: 'POST',
-				success: updatepreview,
-				url: "<%= preview_content_blocks_url %>"
-			});
-		}
-	}
-}
-
-$(document).ready(function() {
-	setInterval("dopreview()", 100);
-	$("#content_block_bodytext").keyup(function() { lastedit = new Date(); lastpreview = false; dosummarize();});
-	$("#content_block_summary").keyup(function() { countupdate();});
-	dopreview();
-	dosummarize();
-	countupdate();
-});
-</script>
+	<%= javascript_include_tag "mortis_cms_edits.js" %>
 <% end %>
 <div class="leftside" style="float:left; width: 40%;">
   <% if @block.errors.any? %>

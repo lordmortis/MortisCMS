@@ -33,6 +33,7 @@ module Mortiscms
 			self.link_root = ""
 			self.writer_query_message = :is_writer?
 			self.editor_query_message = :is_editor?
+			self.assets.precompile += %w( mortis_cms_edits.js )
 		end		
 	end
 
