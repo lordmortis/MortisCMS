@@ -16,7 +16,7 @@ class ContentPagesController < ApplicationController
   end
   
   def create
-    @content_page = ContentPage.new(params[:content_page])
+    @content_page = ContentPage.new(page_params)
     if @content_page.save
       flash[:notice] = "Successfully created content page."
       redirect_to @content_page
@@ -31,7 +31,7 @@ class ContentPagesController < ApplicationController
   
   def update
     @content_page = ContentPage.find(params[:id])
-    if @content_page.update_attributes(params[:content_page])
+    if @content_page.update_attributes(page_params)
       flash[:notice] = "Successfully updated content page."
       redirect_to @content_page
     else
@@ -44,5 +44,10 @@ class ContentPagesController < ApplicationController
     @content_page.destroy
     flash[:notice] = "Successfully destroyed content page."
     redirect_to content_pages_url
+  end
+
+private
+  def page_params
+    params.require(:content_page).permit!
   end
 end
