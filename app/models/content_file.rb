@@ -9,6 +9,7 @@ class ContentFile < ActiveRecord::Base
 
 	has_attached_file :data, path: attachment_real_path, url: attachment_virtual_path
 
+# TODO: Replace with Strong Params
 #	attr_accessible :data_file_name, :description
 
 end

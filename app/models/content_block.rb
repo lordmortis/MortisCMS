@@ -11,7 +11,8 @@ class ContentBlock < ActiveRecord::Base
 	
 	default_scope :order => "published_at desc"
 	
-	attr_accessible :summary, :autosummarize, :preview, :bodytext, :tag_list, :title
+# TODO: Replace with Strong Params
+#	attr_accessible :summary, :autosummarize, :preview, :bodytext, :tag_list, :title
 	
 	def publish(link, editor = nil, email)
 		self.published_at = Time.now

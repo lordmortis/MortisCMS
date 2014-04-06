@@ -2,9 +2,9 @@ begin
   require "jeweler"
   Jeweler::Tasks.new do |gem|
     gem.name = "MortisCMS"
-    gem.summary = "CMS for Rails 3"
+    gem.summary = "CMS for Rails 4"
     gem.files = Dir["{lib}/**/*", "{app}/**/*", "{config}/**/*"]
-		gem.version = "0.1.18"
+		gem.version = "0.1.20"
     gem.authors = ["Brendan Ragan"]
     # other fields that would normally go in your gemspec
     # like authors, email and has_rdoc can also be included here
