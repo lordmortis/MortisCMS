@@ -44,10 +44,18 @@ module MortiscmsHelper
 	end
 
 	def can_edit_content_block?(block)
-		true
+		if current_user.blank?
+			false
+		else
+			ContentBlockPolicy.new(current_user, block).edit?
+		end
 	end
 
 	def can_publish_content_block?(block)
-		true
+		if current_user.blank?
+			false
+		else
+			return ContentBlockPolicy.new(current_user, block).publish?
+		end
 	end
 end
