@@ -1,0 +1,21 @@
+- content_for :title do
+	= @block.title
+- if @block.published_at.blank?
+	%div{class: "unpublished"}
+		%h2 Unpublished
+	Last edited at: 
+	= render_time @block.updated_at, "%H:%M on %b %d, %Y"
+= redcloth_render @block.bodytext
+- for tag in @block.tags 
+	= render_tag_link tag
+- unless @block.published_at.blank?
+	%div{class: "published"}
+		Published: 
+		= render_time @block.published_at, "%H:%M on %b %d, %Y"
+%div{class: "last_updated"}
+	Last Updated:
+	= render_time @block.updated_at, "%H:%M on %b %d, %Y"
+- if can_edit_content_block? @block
+	= link_to 'Edit', edit_content_block_path(@block)
+= render partial: "content_blocks/publish", locals: {block: @block}
+
