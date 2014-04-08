@@ -26,6 +26,13 @@ module MortiscmsHelper
 		value
 	end
 	
+	def render_time(content, format = "%H:%M on %b %d, %Y")
+		content.strftime(format)
+	end
+
+	def render_tag_link(tag)
+		link_to(tag.name.capitalize, action: "tag", id: tag.name)
+	end
 
 	def contentlink(content)
 		link_to(:action => "content", :controller => "content_viewer", :id => content.id)
@@ -34,5 +41,13 @@ module MortiscmsHelper
 	def redcloth_render(content)
 		parser = RedCloth.new(content)
 		raw parser.to_html(:mortiscms_localfile, :mortiscms_localimage, :textile, :markdown)
+	end
+
+	def can_edit_content_block?(block)
+		true
+	end
+
+	def can_publish_content_block?(block)
+		true
 	end
 end
