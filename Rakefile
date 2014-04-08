@@ -12,6 +12,7 @@ begin
     gem.add_dependency 'cocaine', "= 0.3.2"
     gem.add_dependency 'paperclip-meta'
     gem.add_dependency 'RedCloth'
+    gem.add_dependency 'haml-rails'
   end
 rescue
   puts "Jeweler or one of its dependencies is not installed."
