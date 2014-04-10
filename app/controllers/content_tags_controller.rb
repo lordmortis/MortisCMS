@@ -1,9 +1,9 @@
 class ContentTagsController < MortiscmsControllerBase
-	filter_resource_access
 	helper :mortiscms
 
   def index
     @tags = ContentTag.find(:all)
+    user_authorize! :see, ContentTag
 
     respond_to do |format|
       format.html # index.html.erb
@@ -12,11 +12,13 @@ class ContentTagsController < MortiscmsControllerBase
 
   def show
 		@tag = ContentTag.find(params[:id])
+    user_authorize! :see, @tag
     redirect_to controller: :content_viewer, action: :tag, id: @tag.name.downcase
   end
 
   def new
     @tag = ContentTag.new
+    user_authorize! :edit, @tag
 
     respond_to do |format|
       format.html # new.html.erb
@@ -25,10 +27,12 @@ class ContentTagsController < MortiscmsControllerBase
 
   def edit
     @tag = ContentTag.find(params[:id])
+    user_authorize! :edit, @tag
   end
 
   def create
-    @tag = ContentTag.new(params[:content_tag])
+    @tag = ContentTag.new(editable_params)
+    user_authorize! :edit, @tag
     respond_to do |format|
       if @tag.save
         flash[:notice] = 'Tag was successfully created.'
@@ -41,8 +45,9 @@ class ContentTagsController < MortiscmsControllerBase
 
   def update
     @tag = ContentTag.find(params[:id])
+    user_authorize! :edit, @tag
     respond_to do |format|
-      if @tag.update_attributes(params[:content_tag])
+      if @tag.update_attributes(editable_params)
         flash[:notice] = 'Tag was successfully updated.'
         format.html { redirect_to(@tag) }
       else
@@ -53,10 +58,16 @@ class ContentTagsController < MortiscmsControllerBase
 
   def destroy
     @tag = ContentTag.find(params[:id])
+    user_authorize! :destroy, @tag
     @tag.destroy
 
     respond_to do |format|
       format.html { redirect_to(content_tags_url) }
     end
   end	
+
+private
+  def editable_params
+    params.require(:content_tag).permit(:name)
+  end
 end

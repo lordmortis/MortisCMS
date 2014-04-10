@@ -31,7 +31,7 @@ class ContentViewerController < MortiscmsControllerBase
 		end
 
 		@name = @tag.name
-		if current_user != nil and current_user.send(Mortiscms.config.writer_query_message)
+		if user_can? :edit?, @tag
 			@collection = @tag.blocks
 		else
 			@collection = @tag.blocks.publicly_viewable
