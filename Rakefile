@@ -8,8 +8,7 @@ begin
     gem.authors = ["Brendan Ragan"]
     # other fields that would normally go in your gemspec
     # like authors, email and has_rdoc can also be included here
-    gem.add_dependency 'paperclip', "~> 3.0"
-    gem.add_dependency 'cocaine', "= 0.3.2"
+    gem.add_dependency 'paperclip', "~> 4.1"
     gem.add_dependency 'paperclip-meta'
     gem.add_dependency 'RedCloth'
     gem.add_dependency 'haml-rails'

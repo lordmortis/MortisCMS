@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Brendan Ragan"]
-  s.date = "2014-04-08"
+  s.date = "2014-04-10"
   s.extra_rdoc_files = [
     "README.textile"
   ]
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
     "app/controllers/content_pages_controller.rb",
     "app/controllers/content_tags_controller.rb",
     "app/controllers/content_viewer_controller.rb",
+    "app/controllers/mortiscms_controller_base.rb",
     "app/helpers/mortiscms_helper.rb",
     "app/mailers/content_mailer.rb",
     "app/models/content_block.rb",
@@ -31,7 +32,7 @@ Gem::Specification.new do |s|
     "app/models/content_page.rb",
     "app/models/content_tag.rb",
     "app/models/content_tag_block.rb",
-    "app/views/content_blocks/_publish.erb",
+    "app/views/content_blocks/_publish.haml",
     "app/views/content_blocks/edit.erb",
     "app/views/content_blocks/index.erb",
     "app/views/content_blocks/new.erb",
@@ -56,7 +57,7 @@ Gem::Specification.new do |s|
     "app/views/content_tags/index.html.erb",
     "app/views/content_tags/new.html.erb",
     "app/views/content_tags/show.html.erb",
-    "app/views/content_viewer/content.html.erb",
+    "app/views/content_viewer/content.haml",
     "app/views/content_viewer/content.mobile.erb",
     "app/views/content_viewer/not_public.erb",
     "app/views/content_viewer/tag.builder",
@@ -82,23 +83,20 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<jeweler>, [">= 0"])
-      s.add_runtime_dependency(%q<paperclip>, ["~> 3.0"])
-      s.add_runtime_dependency(%q<cocaine>, ["= 0.3.2"])
+      s.add_runtime_dependency(%q<paperclip>, ["~> 4.1"])
       s.add_runtime_dependency(%q<paperclip-meta>, [">= 0"])
       s.add_runtime_dependency(%q<RedCloth>, [">= 0"])
       s.add_runtime_dependency(%q<haml-rails>, [">= 0"])
     else
       s.add_dependency(%q<jeweler>, [">= 0"])
-      s.add_dependency(%q<paperclip>, ["~> 3.0"])
-      s.add_dependency(%q<cocaine>, ["= 0.3.2"])
+      s.add_dependency(%q<paperclip>, ["~> 4.1"])
       s.add_dependency(%q<paperclip-meta>, [">= 0"])
       s.add_dependency(%q<RedCloth>, [">= 0"])
       s.add_dependency(%q<haml-rails>, [">= 0"])
     end
   else
     s.add_dependency(%q<jeweler>, [">= 0"])
-    s.add_dependency(%q<paperclip>, ["~> 3.0"])
-    s.add_dependency(%q<cocaine>, ["= 0.3.2"])
+    s.add_dependency(%q<paperclip>, ["~> 4.1"])
     s.add_dependency(%q<paperclip-meta>, [">= 0"])
     s.add_dependency(%q<RedCloth>, [">= 0"])
     s.add_dependency(%q<haml-rails>, [">= 0"])
