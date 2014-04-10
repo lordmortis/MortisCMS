@@ -1,4 +1,4 @@
-class ContentImagesController < ApplicationController
+class ContentImagesController < MortiscmsControllerBase
 	filter_access_to :all
 	helper :mortiscms
 	

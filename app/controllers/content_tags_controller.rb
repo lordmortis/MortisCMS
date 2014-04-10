@@ -1,4 +1,4 @@
-class ContentTagsController < ApplicationController
+class ContentTagsController < MortiscmsControllerBase
 	filter_resource_access
 	helper :mortiscms
 

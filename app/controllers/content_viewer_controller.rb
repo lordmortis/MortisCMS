@@ -1,4 +1,4 @@
-class ContentViewerController < ApplicationController
+class ContentViewerController < MortiscmsControllerBase
 	helper :mortiscms
 	
 	def homepage

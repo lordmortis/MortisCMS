@@ -1,4 +1,4 @@
-class ContentPagesController < ApplicationController
+class ContentPagesController < MortiscmsControllerBase
 	filter_resource_access
 	helper :mortiscms
 

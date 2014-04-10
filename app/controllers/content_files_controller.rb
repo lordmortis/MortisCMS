@@ -1,9 +1,9 @@
-class ContentFilesController < ApplicationController
-	filter_access_to :all
+class ContentFilesController < MortiscmsControllerBase
 	helper :mortiscms
 	
 	def index
 		@files = ContentFile.all
+		user_authorize! :see, ContentFile
 
 		respond_to do |format|
 			format.html # index.html.erb
@@ -14,6 +14,7 @@ class ContentFilesController < ApplicationController
 
 	def show
 		@file = ContentFile.find(params[:id])
+		user_authorize! :see, @file
 
 		respond_to do |format|
 			format.html # show.html.erb
@@ -23,6 +24,7 @@ class ContentFilesController < ApplicationController
 
 	def new
 		@file = ContentFile.new
+		user_authorize! :edit, @file
 
 		respond_to do |format|
 			format.html # new.html.erb
@@ -32,10 +34,12 @@ class ContentFilesController < ApplicationController
 
 	def edit
 		@file = ContentFile.find(params[:id])
+		user_authorize! :edit, @file
 	end
 
 	def create
-		@file = ContentFile.new(params[:content_file])
+		@file = ContentFile.new(editable_params)
+		user_authorize! :edit, @file
 		@file.author = current_user
 		respond_to do |format|
 			if @file.save
@@ -49,8 +53,9 @@ class ContentFilesController < ApplicationController
 
 	def update
 		@file = ContentFile.find(params[:id])
+		user_authorize! :edit, @file
 		respond_to do |format|
-			if @file.update_attributes(params[:content_file])
+			if @file.update_attributes(editable_params)
 				flash[:notice] = 'File was successfully updated.'
 				format.html { redirect_to(@block) }
 			else
@@ -61,10 +66,16 @@ class ContentFilesController < ApplicationController
 
 	def destroy
 		@file = ContentFile.find(params[:id])
+		user_authorize! :destroy, @file
 		@file.destroy
 
 		respond_to do |format|
 			format.html { redirect_to(content_files_url) }
 		end
 	end	
+
+private
+  def editable_params
+    params.require(:content_file).permit(:data, :description)
+  end
 end
