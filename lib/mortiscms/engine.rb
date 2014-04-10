@@ -15,9 +15,11 @@ module Mortiscms
 	end
 
 	class Configuration
-		attr_accessor :content_admin_route, :site_name, :show_titles_in_pages, :publish_from_address,
-						:show_titles_in_tags, :routes_enabled, :user_model, :link_root, :publish_to_email,
-						:publish_extra_emails, :publish_from_friendly_address, :writer_query_message, :editor_query_message
+		attr_accessor :content_admin_route, :site_name, :show_titles_in_pages, 
+			:publish_from_address, :show_titles_in_tags, :routes_enabled, :user_model,
+			:link_root, :publish_to_email, :publish_extra_emails,
+			:publish_from_friendly_address, :writer_query_message, :editor_query_message,
+			:authorization_system
 		
 		def new
 			self.content_admin_route = {:controller => :index, :action => :admin}
@@ -31,8 +33,7 @@ module Mortiscms
 			self.publish_from_address = "junk@place.com"
 			self.publish_from_friendly_address = "JunkPlace <junk@place.com>"
 			self.link_root = ""
-			self.writer_query_message = :is_writer?
-			self.editor_query_message = :is_editor?
+			self.authorization_system = :pundit
 			self.assets.precompile += %w( mortis_cms_edits.js )
 		end		
 	end
