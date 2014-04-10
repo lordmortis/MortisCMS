@@ -1,5 +1,5 @@
 %div{class: "publish"}
-	- if can_publish_content_block? block
+	- if user_can? :publish?, block
 		- if block.published
 			= link_to "Unpublish", unpublish_content_block_path(@block), data: {confirm: 'Are you sure?'}, method: :post			
 		- else
@@ -10,7 +10,7 @@
 				|
 				= submit_tag("publish")
 		
-	- elsif can_edit_content_block? block
+	- elsif user_can? :edit?, block
 		- if block.published
 			Published
 		- else

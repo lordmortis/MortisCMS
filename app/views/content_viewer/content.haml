@@ -15,7 +15,7 @@
 %div{class: "last_updated"}
 	Last Updated:
 	= render_time @block.updated_at, "%H:%M on %b %d, %Y"
-- if can_edit_content_block? @block
+- if user_can? :edit, @block
 	= link_to 'Edit', edit_content_block_path(@block)
 = render partial: "content_blocks/publish", locals: {block: @block}
 

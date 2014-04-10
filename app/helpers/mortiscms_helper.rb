@@ -43,19 +43,13 @@ module MortiscmsHelper
 		raw parser.to_html(:mortiscms_localfile, :mortiscms_localimage, :textile, :markdown)
 	end
 
-	def can_edit_content_block?(block)
-		if current_user.blank?
-			false
-		else
-			ContentBlockPolicy.new(current_user, block).edit?
+	def user_can?(action, object)
+		unless action.to_s.ends_with?("?")
+			action = "#{action.to_s}?"
 		end
-	end
 
-	def can_publish_content_block?(block)
-		if current_user.blank?
-			false
-		else
-			return ContentBlockPolicy.new(current_user, block).publish?
-		end
+		if Mortiscms.config.authorization_system == :pundit
+			policy(object).send(action)
+		end	
 	end
 end
