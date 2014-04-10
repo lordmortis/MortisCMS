@@ -6,7 +6,7 @@
 </p>
 <p>
   <strong>Tags:</strong>
-	<td><%= tag_list(@block) %></td>
+	<td><%= raw tag_list(@block) %></td>
 </p>
 <p>
   <strong>Pages:</strong>
@@ -22,13 +22,5 @@
   <%= link_to "Destroy", @block, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", content_blocks_path %> | 
 
-	<% if current_user.send(Mortiscms.config.editor_query_message) %>
-		<% if @block.published %>
-			<%= link_to "Unpublish", unpublish_content_block_path(@block), :confirm => 'Are you sure?', method: :post %>
-		<% else %>
-			<%= render partial: "content_blocks/publish" %>
-		<% end %>
-	<% else %>
-		<% if @block.published %>Published<% else %>Unpublished<% end %>
-	<% end %>
+	<%= render partial: "content_blocks/publish", locals: {block: @block}%>
 </p>

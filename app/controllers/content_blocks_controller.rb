@@ -1,9 +1,9 @@
-class ContentBlocksController < ApplicationController
-	filter_access_to :all
+class ContentBlocksController < MortiscmsControllerBase
 	helper :mortiscms
 	
   def index
     @blocks = ContentBlock.find(:all)
+    user_authorize! :see, ContentBlock
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,11 +13,13 @@ class ContentBlocksController < ApplicationController
   end
 
 	def preview
+    user_authorize! :edit, ContentBlock
 		render :text => view_context.redcloth_render(params[:redcloth])
 	end
 	
 	def publish
 		@block = ContentBlock.find(params[:id])
+    user_authorize! :publish, @block
     email = false
     if params[:email]
       email = params[:email].downcase == "true"
@@ -28,12 +30,14 @@ class ContentBlocksController < ApplicationController
 	
 	def unpublish
 		@block = ContentBlock.find(params[:id])
+    user_authorize! :publish, @block
 		@block.unpublish
 		redirect_to(@block)
 	end
 
   def show
 		@block = ContentBlock.find(params[:id])
+    user_authorize! :see, @block
 
     respond_to do |format|
       format.html # show.html.erb
@@ -44,6 +48,7 @@ class ContentBlocksController < ApplicationController
 
   def new
     @block = ContentBlock.new
+    user_authorize! :edit, @block
 
     respond_to do |format|
       format.html # new.html.erb
@@ -53,10 +58,12 @@ class ContentBlocksController < ApplicationController
 
   def edit
     @block = ContentBlock.find(params[:id])
+    user_authorize! :edit, @block
   end
 
   def create
-    @block = ContentBlock.new(params[:content_block])
+    @block = ContentBlock.new(editable_params)
+    user_authorize! :edit, @block
 		@block.author = current_user
     respond_to do |format|
       if @block.save
@@ -70,8 +77,9 @@ class ContentBlocksController < ApplicationController
 
   def update
     @block = ContentBlock.find(params[:id])
+    user_authorize! :edit, @block
     respond_to do |format|
-      if @block.update_attributes(params[:content_block])
+      if @block.update_attributes(editable_params)
         flash[:notice] = 'Block was successfully updated.'
         format.html { redirect_to(@block) }
       else
@@ -82,10 +90,16 @@ class ContentBlocksController < ApplicationController
 
   def destroy
     @block = ContentBlock.find(params[:id])
+    user_authorize! :destroy, @block
     @block.destroy
 
     respond_to do |format|
 			format.html { redirect_to(content_blocks_url) }
     end
-  end	
+  end
+
+private
+  def editable_params
+    params.require(:content_block).permit(:bodytext, :title, :summary, :tag_list)
+  end
 end
