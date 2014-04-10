@@ -1,9 +1,9 @@
 class ContentImagesController < MortiscmsControllerBase
-	filter_access_to :all
 	helper :mortiscms
 	
 	def index
 		@images = ContentImage.all
+		user_authorize! :see, ContentImage
 
 		respond_to do |format|
 			format.html # index.html.erb
@@ -14,6 +14,7 @@ class ContentImagesController < MortiscmsControllerBase
 	
 	def show
 		@image = ContentImage.find(params[:id])
+		user_authorize! :see, @image
 
 		respond_to do |format|
 			format.html # show.html.erb
@@ -23,6 +24,7 @@ class ContentImagesController < MortiscmsControllerBase
 
 	def new
 		@image = ContentImage.new
+		user_authorize! :edit, @image
 
 		respond_to do |format|
 			format.html # new.html.erb
@@ -32,10 +34,12 @@ class ContentImagesController < MortiscmsControllerBase
 
 	def edit
 		@image = ContentImage.find(params[:id])
+		user_authorize! :edit, @image
 	end
 
 	def create
-		@image = ContentImage.new(params[:content_image])
+		@image = ContentImage.new(editable_params)
+		user_authorize! :edit, @image
 		@image.author = current_user
 		respond_to do |format|
 			if @image.save
@@ -49,8 +53,9 @@ class ContentImagesController < MortiscmsControllerBase
 
 	def update
 		@image = ContentImage.find(params[:id])
+		user_authorize! :edit, @image
 		respond_to do |format|
-			if @image.update_attributes(params[:content_image])
+			if @image.update_attributes(editable_params)
 				flash[:notice] = 'Image was successfully updated.'
 				format.html { redirect_to(@image) }
 			else
@@ -60,11 +65,17 @@ class ContentImagesController < MortiscmsControllerBase
 	end
 
 	def destroy
-		@images = ContentImage.find(params[:id])
-		@images.destroy
+		@image = ContentImage.find(params[:id])
+		user_authorize! :destroy, @image
+		@image.destroy
 
 		respond_to do |format|
 			format.html { redirect_to(content_images_url) }
 		end
 	end	
+
+private
+  def editable_params
+    params.require(:content_image).permit(:data, :description)
+  end
 end
