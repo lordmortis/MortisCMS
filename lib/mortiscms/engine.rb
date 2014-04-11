@@ -16,8 +16,8 @@ module Mortiscms
 
 	class Configuration
 		attr_accessor :content_admin_route, :site_name, :show_titles_in_pages, 
-			:publish_from_address, :show_titles_in_tags, :routes_enabled, :user_model,
-			:link_root, :publish_to_email, :publish_extra_emails,
+			:publish_from_address, :show_titles_in_tags, :routes_enabled, 
+			:user_model, :publish_to_email, :publish_extra_emails,
 			:publish_from_friendly_address, :writer_query_message, :editor_query_message,
 			:authorization_system
 		
@@ -32,7 +32,6 @@ module Mortiscms
 			self.publish_extra_emails = nil
 			self.publish_from_address = "junk@place.com"
 			self.publish_from_friendly_address = "JunkPlace <junk@place.com>"
-			self.link_root = ""
 			self.authorization_system = :pundit
 			self.assets.precompile += %w( mortis_cms_edits.js )
 		end		
