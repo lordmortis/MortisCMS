@@ -31,7 +31,7 @@ class ContentViewerController < MortiscmsControllerBase
 		end
 
 		@name = @tag.name
-		if user_can? :edit?, @tag
+		if user_can? :edit?, ContentBlock
 			@collection = @tag.blocks
 		else
 			@collection = @tag.blocks.publicly_viewable
@@ -53,7 +53,7 @@ private
 				return
 		elsif @page.block != nil
 			@block = @page.block
-			if !@block.public? and !(current_user.send(Mortiscms.config.writer_query_message))
+			if !@block.public? and !user_can? :edit, @block
 				redirect_to action: :not_public
 			else
 				render :action => "content", :id => @page.block.id
@@ -64,7 +64,7 @@ private
 		@tag = @page.tag
 		@name = @tag.name
 
-		if current_user != nil and current_user.send(Mortiscms.config.writer_query_message)
+		if user_can? :edit, ContentBlock
 			@collection = @tag.blocks
 		else
 			@collection = @tag.blocks.publicly_viewable
