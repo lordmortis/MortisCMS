@@ -42,7 +42,7 @@ private
 
 	def render_page
 		if @page == nil
-			redirect_to Mortiscms.config.content_admin_route
+			render action: :not_found, status: :not_found
 			return
 		elsif @page.controller != nil
 				if @page.action != nil
