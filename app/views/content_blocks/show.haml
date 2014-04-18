@@ -1,0 +1,32 @@
+- content_for :title do
+  Content Block -
+  = @block.title
+
+%p
+  %strong Title:
+  = @block.title
+
+%p
+  %strong Tags:
+  = raw tag_list(@block)
+
+%p
+  %strong Pages:
+  = page_list(@block)
+
+- if @block.image.present?
+  = image_tag(@block.image.data.url(:small), size: @block.image.data.image_size(:small))
+
+%p 
+  %strong Summary:
+  = @block.summary
+
+= redcloth_render(@block.bodytext)
+
+%p
+  = link_to "Edit", edit_content_block_path(@block)
+  |
+  = link_to "Destroy", @block, confirm: "Are you sure?", method: :delete
+  |
+  = link_to "View All", content_blocks_path
+  = render partial: "content_blocks/publish", locals: {block:@block}
