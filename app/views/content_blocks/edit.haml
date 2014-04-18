@@ -17,6 +17,9 @@
       = f.label :title, "title"
       = f.text_field :title
     %p
+      = f.label :content_image_id, "Header Image"
+      = f.select :content_image_id, ContentImage.all.collect {|p| [ "#{p.description}", p.id ] }, {:include_blank => 'No Image'}
+    %p
       %div= link_to("Layout Reference", "http://redcloth.org/textile/")
       %div= f.label :bodytext, "Body Text"
       %div= f.check_box :preview

@@ -4,6 +4,7 @@ class ContentBlock < ActiveRecord::Base
 
 	belongs_to :editor, :class_name => Mortiscms.config.user_model
 	belongs_to :author, :class_name => Mortiscms.config.user_model
+	belongs_to :content_image
 
 	has_many :taglinks, :class_name => "ContentTagBlock", :foreign_key => "content_block_id"
 	has_many :tags, :class_name => "ContentTag", :through => :taglinks
@@ -14,6 +15,14 @@ class ContentBlock < ActiveRecord::Base
 # TODO: Replace with Strong Params
 #	attr_accessible :summary, :autosummarize, :preview, :bodytext, :tag_list, :title
 	
+	def image
+		content_image
+	end
+
+	def image=(value)
+		self.content_image = value
+	end
+
 	def publish(link, editor = nil, email)
 		self.published_at = Time.now
 
