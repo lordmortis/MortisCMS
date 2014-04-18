@@ -1,0 +1,38 @@
+- content_for :title do
+  Edit Content
+- content_for :header do
+  = javascript_include_tag "mortis_cms_edits.js"
+
+%div{class:"leftside", style: "float:left; width 40%;"}
+  - if @block.errors.any?
+    %div{id: "error_explanation"}
+      %h2
+        = pluralize(@block.errors.count, "error")
+        prohibited this Block from being saved:
+      %ul
+        - @block.errors.full_messages.each do |msg|
+          %li= msg
+  = form_for(@block) do |f|
+    %p
+      = f.label :title, "title"
+      = f.text_field :title
+    %p
+      %div= link_to("Layout Reference", "http://redcloth.org/textile/")
+      %div= f.label :bodytext, "Body Text"
+      %div= f.check_box :preview
+      %div= f.check_box :autosummarize
+      %div= f.text_area :bodytext
+    %p
+      %div
+        = f.label :summary
+        &#8211
+        %span{id:"summary_count"}
+        &#47; 140 (this count includes the link)
+      = f.text_area :summary, rows: 6
+    %p
+      = f.label :tag_list, "Tags"
+      = f.text_field :tag_list
+      (separate each tag with a comma)
+    = f.submit "Modify"
+  = link_to "Back", content_blocks_path
+%div{class:"rightside", style: "float:left; width:60%", id: "preview_box"}
