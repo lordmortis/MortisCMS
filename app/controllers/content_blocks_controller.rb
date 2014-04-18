@@ -3,6 +3,7 @@ class ContentBlocksController < MortiscmsControllerBase
 	
   def index
     @blocks = ContentBlock.find(:all)
+    @title = "Content Blocks"
     user_authorize! :see, ContentBlock
 
     respond_to do |format|
@@ -57,6 +58,7 @@ class ContentBlocksController < MortiscmsControllerBase
   end
 
   def edit
+    @title = "Edit Content Blocks"
     @block = ContentBlock.find(params[:id])
     user_authorize! :edit, @block
   end
