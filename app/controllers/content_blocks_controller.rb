@@ -102,6 +102,8 @@ class ContentBlocksController < MortiscmsControllerBase
 
 private
   def editable_params
-    params.require(:content_block).permit(:bodytext, :title, :summary, :tag_list)
+    params.require(:content_block).permit(
+      :bodytext, :title, :summary, :tag_list, :autosummarize, :content_image_id
+    )
   end
 end

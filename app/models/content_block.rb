@@ -12,9 +12,6 @@ class ContentBlock < ActiveRecord::Base
 	
 	default_scope :order => "published_at desc"
 	
-# TODO: Replace with Strong Params
-#	attr_accessible :summary, :autosummarize, :preview, :bodytext, :tag_list, :title
-	
 	def image
 		content_image
 	end
