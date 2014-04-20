@@ -27,6 +27,7 @@ class ContentBlock < ActiveRecord::Base
 			self.editor = editor
 		end
 
+=begin
 		if Mortiscms.config.publish_to_email != false and email
 			query = Mortiscms.config.publish_to_email[:query]
 			namemethod = Mortiscms.config.publish_to_email[:name]
@@ -44,7 +45,7 @@ class ContentBlock < ActiveRecord::Base
 				end
 			end
 		end
-
+=end
 
 #  FIXME : needs to work with new engine!		
 #		if (self.short_url == nil && File.exist?("config/bitly.yml"))
