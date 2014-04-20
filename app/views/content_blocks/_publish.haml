@@ -1,11 +1,11 @@
 %div{class: "publish"}
 	- if user_can? :publish?, block
 		- if block.published
-			= link_to "Unpublish", unpublish_content_block_path(@block), data: {confirm: 'Are you sure?'}, method: :post			
+			= link_to "Unpublish", unpublish_content_block_path(block), data: {confirm: 'Are you sure?'}, method: :post			
 		- else
 			= form_tag(publish_content_block_path(block), data: {confirm: "Are You Sure?"}, method: :post) do
 				%span{class: "send_email"}
-					= check_box_tag :email, true, true 
+					= check_box_tag :email, true, true
 					Send Email
 				|
 				= submit_tag("publish")
