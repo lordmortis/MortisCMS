@@ -27,25 +27,29 @@ class ContentBlock < ActiveRecord::Base
 			self.editor = editor
 		end
 
-=begin
 		if Mortiscms.config.publish_to_email != false and email
 			query = Mortiscms.config.publish_to_email[:query]
 			namemethod = Mortiscms.config.publish_to_email[:name]
 			emailmethod = Mortiscms.config.publish_to_email[:email]
-			query.each do |person|
-				name = person.send(namemethod)
-				email = person.send(emailmethod)
-				if email != nil and email.strip != ""
-					ContentMailer.publish_block(self, name, email).deliver
+			if Rails.env.production?
+				query.each do |person|
+					name = person.send(namemethod)
+					email = person.send(emailmethod)
+					if email != nil and email.strip != ""
+						ContentMailer.publish_block(self, name, email).deliver
+					end
 				end
-			end
-			if Mortiscms.config.publish_extra_emails != nil
-				Mortiscms.config.publish_extra_emails.each do |email|
-					ContentMailer.publish_block(self, email[0], email[1]).deliver
+				if Mortiscms.config.publish_extra_emails != nil
+					Mortiscms.config.publish_extra_emails.each do |email|
+						ContentMailer.publish_block(self, email[0], email[1]).deliver
+					end
+				end
+			else
+				if editor.present?
+					ContentMailer.publish_block(self, editor.send(namemethod), editor.send(emailmethod)).deliver
 				end
 			end
 		end
-=end
 
 #  FIXME : needs to work with new engine!		
 #		if (self.short_url == nil && File.exist?("config/bitly.yml"))
