@@ -4,7 +4,6 @@ class ContentMailer < ActionMailer::Base
     helper :mortiscms
 
   def mail(headers = {}, &block)
-    byebug
     if Rails.env == "staging" || Rails.env == "development"
       if request.env["action_controller.instance"].methods.include? :current_user
         current_user = request.env["action_controller.instance"].current_user
