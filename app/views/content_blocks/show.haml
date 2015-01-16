@@ -28,5 +28,7 @@
   |
   = link_to "Destroy", @block, confirm: "Are you sure?", method: :delete
   |
+  = link_to 'Preview Link', controller: :content_viewer, action: :content, id: @block.id, preview: @block.preview_hash
+  |
   = link_to "View All", content_blocks_path
   = render partial: "content_blocks/publish", locals: {block:@block}

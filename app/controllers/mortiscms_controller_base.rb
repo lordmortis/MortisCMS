@@ -9,6 +9,15 @@ class MortiscmsControllerBase < ApplicationController
     end
   end
 
+  def user_authorize(action, object)
+    begin
+      user_authorize!(action, object)
+    rescue
+      return false
+    end
+    return true
+  end
+
 	def user_can?(action, object)
 		unless action.to_s.ends_with?("?")
 			action = "#{action.to_s}?"

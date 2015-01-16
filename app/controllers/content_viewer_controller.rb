@@ -16,7 +16,7 @@ class ContentViewerController < MortiscmsControllerBase
 		if @block == nil
 			redirect_to :action => "section"
 		else
-			if !@block.public? and !current_user.send(Mortiscms.config.writer_query_message)
+			if (!@block.public?) && (!user_authorize(:edit, @block) && params[:preview] != @block.preview_hash)
 				redirect_to action: :not_public
 			end
 		end
@@ -53,7 +53,7 @@ private
 				return
 		elsif @page.block != nil
 			@block = @page.block
-			if !@block.public? and !user_can? :edit, @block
+			if !@block.public? && (!user_can?(:edit, @block) && params[:preview] != @block.preview_hash)
 				redirect_to action: :not_public
 			else
 				render :action => "content", :id => @page.block.id

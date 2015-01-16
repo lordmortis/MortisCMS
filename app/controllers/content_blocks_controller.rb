@@ -38,6 +38,7 @@ class ContentBlocksController < MortiscmsControllerBase
 
   def show
 		@block = ContentBlock.find(params[:id])
+    
     user_authorize! :see, @block
 
     respond_to do |format|

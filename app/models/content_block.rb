@@ -11,6 +11,8 @@ class ContentBlock < ActiveRecord::Base
 	has_many :pages, :class_name => "ContentPage", :foreign_key => "content_block_id"
 	
 	default_scope :order => "published_at desc"
+
+	before_save :generate_preview_hash
 	
 	def image
 		content_image
@@ -166,5 +168,10 @@ class ContentBlock < ActiveRecord::Base
 
 	def self.publicly_viewable
 		where("content_blocks.published_at IS NOT NULL")
+	end
+
+private
+	def generate_preview_hash
+		self.preview_hash = SecureRandom.hex
 	end
 end

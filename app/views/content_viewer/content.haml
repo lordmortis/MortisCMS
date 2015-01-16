@@ -17,5 +17,6 @@
 	= render_time @block.updated_at, "%H:%M on %b %d, %Y"
 - if user_can? :edit, @block
 	= link_to 'Edit', edit_content_block_path(@block)
+	= link_to 'Preview Link', controller: :content_viewer, action: :content, id: @block.id, preview: @block.preview_hash
 = render partial: "content_blocks/publish", locals: {block: @block}
 
