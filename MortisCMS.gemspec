@@ -6,100 +6,27 @@
 
 Gem::Specification.new do |s|
   s.name = "MortisCMS"
-  s.version = "0.1.20"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
-  s.authors = ["Brendan Ragan"]
-  s.date = "2014-04-10"
+  s.authors       = ["Brendan Ragan"]
+  s.email         = ["lordmortis@gmail.com"]
+  s.date          = "2015-02-13"
+  s.summary       = "A simple, stupid CMS for Rails 4"
   s.extra_rdoc_files = [
     "README.textile"
   ]
-  s.files = [
-    "app/assets/javascripts/mortis_cms_edits.js.coffee",
-    "app/controllers/content_blocks_controller.rb",
-    "app/controllers/content_files_controller.rb",
-    "app/controllers/content_images_controller.rb",
-    "app/controllers/content_pages_controller.rb",
-    "app/controllers/content_tags_controller.rb",
-    "app/controllers/content_viewer_controller.rb",
-    "app/controllers/mortiscms_controller_base.rb",
-    "app/helpers/mortiscms_helper.rb",
-    "app/mailers/content_mailer.rb",
-    "app/models/content_block.rb",
-    "app/models/content_file.rb",
-    "app/models/content_image.rb",
-    "app/models/content_page.rb",
-    "app/models/content_tag.rb",
-    "app/models/content_tag_block.rb",
-    "app/views/content_blocks/_publish.haml",
-    "app/views/content_blocks/edit.erb",
-    "app/views/content_blocks/index.erb",
-    "app/views/content_blocks/new.erb",
-    "app/views/content_blocks/show.erb",
-    "app/views/content_files/_form.html.erb",
-    "app/views/content_files/edit.html.erb",
-    "app/views/content_files/index.html.erb",
-    "app/views/content_files/new.html.erb",
-    "app/views/content_files/show.html.erb",
-    "app/views/content_images/_form.html.erb",
-    "app/views/content_images/edit.html.erb",
-    "app/views/content_images/index.html.erb",
-    "app/views/content_images/new.html.erb",
-    "app/views/content_images/show.html.erb",
-    "app/views/content_mailer/publish_block.text.erb",
-    "app/views/content_pages/_form.html.erb",
-    "app/views/content_pages/edit.html.erb",
-    "app/views/content_pages/index.html.erb",
-    "app/views/content_pages/new.html.erb",
-    "app/views/content_pages/show.html.erb",
-    "app/views/content_tags/edit.html.erb",
-    "app/views/content_tags/index.html.erb",
-    "app/views/content_tags/new.html.erb",
-    "app/views/content_tags/show.html.erb",
-    "app/views/content_viewer/content.haml",
-    "app/views/content_viewer/content.mobile.erb",
-    "app/views/content_viewer/not_public.erb",
-    "app/views/content_viewer/tag.builder",
-    "app/views/content_viewer/tag.html.erb",
-    "app/views/content_viewer/tag.mobile.erb",
-    "config/initializers/paperclip_hashed_path.rb",
-    "config/routes.rb",
-    "lib/generators/mortiscms/install_generator.rb",
-    "lib/generators/mortiscms/install_mailer_templates.rb",
-    "lib/generators/mortiscms/templates/mortiscms_initializer.rb",
-    "lib/generators/mortiscms/templates/publish_block.html.erb",
-    "lib/generators/mortiscms/templates/publish_block.text.erb",
-    "lib/mortiscms.rb",
-    "lib/mortiscms/engine.rb",
-    "lib/mortiscms_redcloth.rb",
-    "lib/railties/tasks.rake"
-  ]
+  s.files = `git ls-files -z`.split("\x0")
   s.rubygems_version = "2.2.2"
-  s.summary = "CMS for Rails 4"
+  s.license       = "MIT"
 
-  if s.respond_to? :specification_version then
-    s.specification_version = 4
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<jeweler>, [">= 0"])
-      s.add_runtime_dependency(%q<paperclip>, ["~> 4.1"])
-      s.add_runtime_dependency(%q<paperclip-meta>, [">= 0"])
-      s.add_runtime_dependency(%q<RedCloth>, [">= 0"])
-      s.add_runtime_dependency(%q<haml-rails>, [">= 0"])
-    else
-      s.add_dependency(%q<jeweler>, [">= 0"])
-      s.add_dependency(%q<paperclip>, ["~> 4.1"])
-      s.add_dependency(%q<paperclip-meta>, [">= 0"])
-      s.add_dependency(%q<RedCloth>, [">= 0"])
-      s.add_dependency(%q<haml-rails>, [">= 0"])
-    end
-  else
-    s.add_dependency(%q<jeweler>, [">= 0"])
-    s.add_dependency(%q<paperclip>, ["~> 4.1"])
-    s.add_dependency(%q<paperclip-meta>, [">= 0"])
-    s.add_dependency(%q<RedCloth>, [">= 0"])
-    s.add_dependency(%q<haml-rails>, [">= 0"])
-  end
+  s.add_dependency 'RedCloth', '>= 4.2'
+  s.add_dependency 'haml-rails', '>= 0.5.3'
+  s.add_dependency 'paperclip', '~> 4.1'
+  s.add_dependency 'paperclip-meta', '>= 0'
+  s.add_development_dependency "bundler", "~> 1.7"
+  s.add_development_dependency "rake", "~> 10.0"
 end
 
