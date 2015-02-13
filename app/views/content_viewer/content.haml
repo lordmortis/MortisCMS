@@ -1,22 +1,29 @@
-- content_for :title do
-	= @block.title
+= content_for :header do
+  -if @block.published
+    %meta{property: "og:title", content: @block.title}
+    %meta{property: "og:description", content: @block.summary}
+    %meta{property: "og:type", content: "article" }
+    %meta{property: "og:url", content: url_for(controller: :content_viewer, action: :content, id: @block.id, only_path: false) }
+
+= content_for :title do
+  = @block.title
 - if @block.published_at.blank?
-	%div{class: "unpublished"}
-		%h2 Unpublished
-	Last edited at: 
-	= render_time @block.updated_at, "%H:%M on %b %d, %Y"
+  %div{class: "unpublished"}
+    %h2 Unpublished
+  Last edited at: 
+  = render_time @block.updated_at, "%H:%M on %b %d, %Y"
 = redcloth_render @block.bodytext
 - for tag in @block.tags 
-	= render_tag_link tag
+  = render_tag_link tag
 - unless @block.published_at.blank?
-	%div{class: "published"}
-		Published: 
-		= render_time @block.published_at, "%H:%M on %b %d, %Y"
+  %div{class: "published"}
+    Published: 
+    = render_time @block.published_at, "%H:%M on %b %d, %Y"
 %div{class: "last_updated"}
-	Last Updated:
-	= render_time @block.updated_at, "%H:%M on %b %d, %Y"
+  Last Updated:
+  = render_time @block.updated_at, "%H:%M on %b %d, %Y"
 - if user_can? :edit, @block
-	= link_to 'Edit', edit_content_block_path(@block)
-	= link_to 'Preview Link', controller: :content_viewer, action: :content, id: @block.id, preview: @block.preview_hash
+  = link_to 'Edit', edit_content_block_path(@block)
+  = link_to 'Preview Link', controller: :content_viewer, action: :content, id: @block.id, preview: @block.preview_hash
 = render partial: "content_blocks/publish", locals: {block: @block}
 
