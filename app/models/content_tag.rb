@@ -1,6 +1,6 @@
 class ContentTag < ActiveRecord::Base
 	has_many :taglinks, :class_name => "ContentTagBlock", :foreign_key => "content_tag_id"
-	has_many :blocks, :class_name => "ContentBlock", :through => :taglinks, :order => ["updated_at desc"]
+	has_many :blocks, -> { order(updated_at: :desc) }, :class_name => "ContentBlock", :through => :taglinks
 	has_many :pages, :class_name => "ContentPage", :foreign_key => "content_tag_id"
 
 	before_save :downcase_name
@@ -9,9 +9,9 @@ class ContentTag < ActiveRecord::Base
 		self.name = name.downcase
 		true
 	end
-	
+
 	def page?
-		pages.count > 0 
+		pages.count > 0
 	end
 
 	def public?

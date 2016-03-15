@@ -9,11 +9,11 @@ class ContentBlock < ActiveRecord::Base
 	has_many :taglinks, :class_name => "ContentTagBlock", :foreign_key => "content_block_id"
 	has_many :tags, :class_name => "ContentTag", :through => :taglinks
 	has_many :pages, :class_name => "ContentPage", :foreign_key => "content_block_id"
-	
-	default_scope :order => "published_at desc"
+
+	default_scope -> { order(published_at: :desc) }
 
 	before_save :generate_preview_hash
-	
+
 	def image
 		content_image
 	end
@@ -53,14 +53,14 @@ class ContentBlock < ActiveRecord::Base
 			end
 		end
 
-#  FIXME : needs to work with new engine!		
+#  FIXME : needs to work with new engine!
 #		if (self.short_url == nil && File.exist?("config/bitly.yml"))
 #			bitlycreds = YAML.load_file("config/bitly.yml")["bitly"]
 #			bitly = Bitly.new(bitlycreds["username"], bitlycreds["secret"])
 #			self.short_url = bitly.shorten(link).short_url
 #		end
-		
-		
+
+
 #		if (self.tweet_id == nil and ContentTwitterLib::Setup.Working)
 #			twittercreds = YAML.load_file("config/authlogic.yml")["connect"]["twitter"]
 #			oauth = Twitter::OAuth.new(twittercreds["key"], twittercreds["secret"])
@@ -68,14 +68,14 @@ class ContentBlock < ActiveRecord::Base
 #			client = Twitter::Base.new(oauth)
 #			self.tweet_id = client.update("#{self.summary} #{self.short_url}").id
 #		end
-		
+
 		# do LJ publishing
 		self.save
 	end
-	
+
 	def unpublish
 		self.published_at = nil
-		
+
 		# Remove tweet.
 #		if (self.tweet_id != nil and ContentTwitterLib::Setup.Working)
 #			twittercreds = YAML.load_file("config/authlogic.yml")["connect"]["twitter"]
@@ -90,11 +90,11 @@ class ContentBlock < ActiveRecord::Base
 #				self.tweet_id = nil
 #			end
 #		end
-#		
+#
 		# Remove LJ post.
 		self.save
 	end
-		
+
 	def tag_list()
 		value = ""
 		for tag in tags
@@ -104,7 +104,7 @@ class ContentBlock < ActiveRecord::Base
 		if value != ""
 			value = value[0..-3]
 		end
-		
+
 		value
 	end
 
@@ -117,17 +117,17 @@ class ContentBlock < ActiveRecord::Base
 		if value != ""
 			value = value[0..-3]
 		end
-		
+
 		value
 	end
-	
+
 	def tag_list=(value)
 		list = value.split(",")
 		newlist = []
 		for item in list
 			newlist << item.strip
 		end
-		
+
 		list = newlist
 
 		for taglink in taglinks
@@ -137,19 +137,19 @@ class ContentBlock < ActiveRecord::Base
 				list.delete(taglink.tag.name)
 			end
 		end
-		
+
 		for newtag in list
 			atag = ContentTag.find_by_name(newtag.downcase)
 			if atag == nil
 				atag = ContentTag.new(:name => newtag.downcase)
 				atag
 			end
-			
+
 			tags << atag
-			
+
 		end
 	end
-		
+
 	def do_autosummarize
 		if bodytext.size <= 160
 			self.summary = bodytext
@@ -157,7 +157,7 @@ class ContentBlock < ActiveRecord::Base
 			self.summary = bodytext[0..156] + "..."
 		end
 	end
-	
+
 	def published
 		self.published_at != nil
 	end

@@ -1,19 +1,19 @@
 class ContentPage < ActiveRecord::Base
 	belongs_to :tag, :class_name => "ContentTag", :foreign_key => "content_tag_id"
 	belongs_to :block, :class_name => "ContentBlock", :foreign_key => "content_block_id"
-	
+
 # TODO: Replace with Strong Params
 #  attr_accessible :content_block_id, :content_tag_id, :name, :home, :order_index, :navbar, :controller, :action
 
-	scope :topbar, :order => ["order_index"], :conditions => ["navbar = ?", true]
+	scope :topbar, -> { order(:order_index).where(navbar: true) }
 
-	scope :proper_order, :order => ["order_index"]
+	scope :proper_order, -> { order(:order_index) }
 
 	before_save :blank_to_null, :check_home, :downcase_name
-	
+
 	def blank_to_null
 		nullarray = [:controller, :action]
-			
+
 		nullarray.each do |attr|
 			if self[attr] != nil
 				self[attr] = self[attr].strip
@@ -22,10 +22,10 @@ class ContentPage < ActiveRecord::Base
 				end
 			end
 		end
-		
+
 		true
 	end
-	
+
 	def text_type
 		if controller != nil
 			"Rails Page"
@@ -39,7 +39,7 @@ class ContentPage < ActiveRecord::Base
 	end
 
 	def linked_object
-		if controller 
+		if controller
 			begin
 				route = {controller: controller, action: action}
   				ActionController::Routing::Routes.recognize_path(route)
