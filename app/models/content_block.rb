@@ -10,7 +10,7 @@ class ContentBlock < ActiveRecord::Base
 	has_many :tags, :class_name => "ContentTag", :through => :taglinks
 	has_many :pages, :class_name => "ContentPage", :foreign_key => "content_block_id"
 
-	default_scope -> { order(published_at: :desc) }
+	default_scope -> { order("published_at DESC") }
 
 	before_save :generate_preview_hash
 
