@@ -1,8 +1,8 @@
 class ContentBlocksController < MortiscmsControllerBase
 	helper :mortiscms
-	
+
   def index
-    @blocks = ContentBlock.find(:all)
+    @blocks = ContentBlock.all
     @title = "Content Blocks"
     user_authorize! :see, ContentBlock
 
@@ -17,7 +17,7 @@ class ContentBlocksController < MortiscmsControllerBase
     user_authorize! :edit, ContentBlock
 		render :text => view_context.redcloth_render(params[:redcloth])
 	end
-	
+
 	def publish
 		@block = ContentBlock.find(params[:id])
     user_authorize! :publish, @block
@@ -28,7 +28,7 @@ class ContentBlocksController < MortiscmsControllerBase
 		@block.publish(url_for(:action => "content", :controller => "content_viewer", :id => @block.id, :skip_relative_url_root => true), current_user, email)
 		redirect_to(@block)
 	end
-	
+
 	def unpublish
 		@block = ContentBlock.find(params[:id])
     user_authorize! :publish, @block
@@ -38,7 +38,7 @@ class ContentBlocksController < MortiscmsControllerBase
 
   def show
 		@block = ContentBlock.find(params[:id])
-    
+
     user_authorize! :see, @block
 
     respond_to do |format|

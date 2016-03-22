@@ -2,7 +2,7 @@ class ContentTagsController < MortiscmsControllerBase
 	helper :mortiscms
 
   def index
-    @tags = ContentTag.find(:all)
+    @tags = ContentTag.all
     user_authorize! :see, ContentTag
 
     respond_to do |format|
@@ -64,7 +64,7 @@ class ContentTagsController < MortiscmsControllerBase
     respond_to do |format|
       format.html { redirect_to(content_tags_url) }
     end
-  end	
+  end
 
 private
   def editable_params
